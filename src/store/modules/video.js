@@ -7,7 +7,11 @@ export default {
   state: {
     videos: [],
   },
-  getters: {},
+  getters: {
+    getVideos(state) {
+      return state.videos;
+    },
+  },
   mutations: {
     SET_VIDEO_LIST(state, videos) {
       state.videos = videos;

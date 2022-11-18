@@ -4,7 +4,9 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>
-        <router-link :to="{ name: 'home' }" id="nav_a"> 메인 </router-link>
+        <router-link :to="{ name: 'home' }" id="nav_a">
+          몸, 좋네요
+        </router-link>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
