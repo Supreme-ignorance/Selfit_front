@@ -26,20 +26,17 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
+          <v-list-item
+            two-line
+            v-for="board in getBoards"
+            :key="board.boardSeq"
+          >
+            <v-list-item-content>
+              <v-list-item-title>{{ board.boardName }}</v-list-item-title>
+              <v-list-item-subtitle>{{
+                board.boardDetail
+              }}</v-list-item-subtitle>
+            </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -47,7 +44,7 @@
   </header>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   name: "MyHeader",
   methods: {
@@ -56,9 +53,9 @@ export default {
     },
   },
   computed: {
-    ...mapState["loginUser"],
+    ...mapGetters(["getLoginUser", "getBoards"]),
     getUser() {
-      if (this.loginUser) {
+      if (this.getLoginUser) {
         return true;
       } else {
         return false;
@@ -75,6 +72,10 @@ export default {
     group() {
       this.drawer = false;
     },
+  },
+
+  created() {
+    this.$store.dispatch("callBoards");
   },
 };
 </script>
