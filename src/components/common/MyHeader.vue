@@ -16,10 +16,12 @@
       <v-spacer></v-spacer>
 
       <a href="#" v-if="getUser" @click="logout" id="nav_a">로그아웃</a>
-      <router-link :to="{ name: 'login' }" v-else id="nav_a">
-        로그인
-      </router-link>
-      <router-link :to="{ name: 'regist' }" id="nav_a"> 회원가입 </router-link>
+      <div v-else>
+        <router-link :to="{ name: 'login' }" id="nav_a"> 로그인 </router-link>
+        <router-link :to="{ name: 'regist' }" id="nav_a">
+          회원가입
+        </router-link>
+      </div>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" absolute bottom temporary>

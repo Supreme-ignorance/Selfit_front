@@ -3,6 +3,7 @@ import axios from "axios";
 const commonPath = "http://localhost:9999/api/";
 
 export default {
+  namespaced: false,
   state: {
     boards: [],
   },

@@ -16,11 +16,22 @@
                   <v-text-field v-model="id" label="id"></v-text-field>
                   <v-text-field
                     v-model="password"
+                    :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                     label="password"
+                    :type="show ? 'text' : 'password'"
+                    @click:append="show = !show"
                   ></v-text-field>
                   <v-text-field v-model="name" label="name"></v-text-field>
-                  <v-text-field v-model="email" label="email"></v-text-field>
-                  <v-text-field v-model="age" label="age"></v-text-field>
+                  <v-text-field
+                    v-model="email"
+                    label="email"
+                    type="email"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="age"
+                    label="age"
+                    type="number"
+                  ></v-text-field>
                   <v-select
                     v-model="gender"
                     :items="genders"
@@ -49,6 +60,8 @@ export default {
     return {
       gender: "",
       genders: ["man", "woman"],
+      show: false,
+      password: "Password",
     };
   },
 };
