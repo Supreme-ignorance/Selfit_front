@@ -3,17 +3,17 @@ import VueRouter from "vue-router";
 
 import HomeView from "../views/HomeView.vue";
 import UserView from "../views/UserView.vue";
-import ReviewView from "../views/ReviewView.vue";
+import BoardView from "../views/BoardView.vue";
 import VideoView from "../views/VideoView.vue";
 
 import UserLogin from "../components/User/UserLogin.vue";
 import UserRegist from "../components/User/UserRegist.vue";
 import UserDetail from "../components/User/UserDetail.vue";
 
-import ReviewForm from "../components/Review/ReviewForm.vue";
-import ReviewList from "../components/Review/ReviewList.vue";
-import ReviewDetail from "../components/Review/ReviewDetail.vue";
-import ReviewModify from "../components/Review/ReviewModify.vue";
+import ArticleForm from "../components/Article/ArticleForm";
+import ArticleList from "../components/Article/ArticleList.vue";
+import ArticleDetail from "../components/Article/ArticleDetail.vue";
+import ArticleModify from "../components/Article/ArticleModify.vue";
 
 import LikedVideoList from "../components/Video/LikedVideoList.vue";
 import VideoDetail from "../components/Video/VideoDetail.vue";
@@ -50,29 +50,31 @@ const routes = [
     ],
   },
   {
-    path: "/review",
-    name: "review",
-    component: ReviewView,
+    path: "/board",
+    name: "borad",
+    component: BoardView,
     children: [
       {
-        path: "",
-        name: "ReviewList",
-        component: ReviewList,
+        path: ":boardSeq",
+        name: "ArticleList",
+        component: ArticleList,
+        props: true,
       },
       {
         path: "write",
-        name: "reviewWrite",
-        component: ReviewForm,
+        name: "ArticleWrite",
+        component: ArticleForm,
       },
       {
-        path: ":id",
-        name: "reviewDetail",
-        component: ReviewDetail,
+        path: ":boardSeq/:id",
+        name: "ArticleDetail",
+        component: ArticleDetail,
+        props: true,
       },
       {
         path: "modify",
-        name: "reviewModify",
-        component: ReviewModify,
+        name: "ArticleModify",
+        component: ArticleModify,
       },
     ],
   },

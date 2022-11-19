@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div class="col mt-12"></div>
     <v-container>
       <v-layout justify-center>
         <v-simple-table style="width: 90%">
@@ -49,7 +48,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  name: "VideoList",
+  name: "video-List",
   computed: {
     ...mapGetters(["getVideos"]),
   },

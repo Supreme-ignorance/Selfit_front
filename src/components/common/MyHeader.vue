@@ -3,15 +3,11 @@
     <v-app-bar color="deep-purple accent-4" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>
-        <router-link :to="{ name: 'home' }" id="nav_a">
-          몸, 좋네요
-        </router-link>
-      </v-toolbar-title>
-
       <v-spacer></v-spacer>
 
-      <router-link to="/video" id="nav_a"> 비디오 </router-link>
+      <v-toolbar-title>
+        <router-link :to="{ name: 'home' }" id="nav_a"> SELFIT </router-link>
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -28,14 +24,25 @@
       <v-list nav dense>
         <v-list-item-group
           v-model="group"
-          active-class="deep-purple--text text--accent-4"
+          active-class="deep-purple--text text--accent-5"
         >
+          <v-list-item>
+            <v-list-item-content @click="goUrl('/video')">
+              <v-list-item-title> 비디오 </v-list-item-title>
+              <v-list-item-subtitle>
+                이것만 따라하면 당신도 몸짱
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-divider></v-divider>
+
           <v-list-item
             two-line
             v-for="board in getBoards"
             :key="board.boardSeq"
           >
-            <v-list-item-content>
+            <v-list-item-content @click="goBoard(board.boardSeq)">
               <v-list-item-title>{{ board.boardName }}</v-list-item-title>
               <v-list-item-subtitle>{{
                 board.boardDetail
@@ -54,6 +61,14 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logout");
+    },
+    goUrl(url) {
+      this.$router.push(url).catch(() => {});
+    },
+    goBoard(url) {
+      this.$router
+        .push({ name: "ArticleList", params: { boardSeq: url } })
+        .catch(() => {});
     },
   },
   computed: {

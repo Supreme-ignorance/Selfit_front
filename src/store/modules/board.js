@@ -6,15 +6,22 @@ export default {
   namespaced: false,
   state: {
     boards: [],
+    articles: [],
   },
   getters: {
     getBoards(state) {
       return state.boards;
     },
+    getArticles(state) {
+      return state.articles;
+    },
   },
   mutations: {
     CALL_BOARDS(state, list) {
       state.boards = list;
+    },
+    CALL_ARTICLES(state, list) {
+      state.articles = list;
     },
   },
   actions: {
@@ -25,8 +32,23 @@ export default {
         method: "GET",
       })
         .then((res) => {
-          console.log("videoList setting...");
+          console.log("boardList setting...");
           commit("CALL_BOARDS", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    callArticles({ commit }, boardSeq) {
+      let API_URL = commonPath + "article/list/" + boardSeq;
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {},
+      })
+        .then((res) => {
+          console.log("articleList setting...");
+          commit("CALL_ARTICLES", res.data);
         })
         .catch((err) => {
           console.log(err);
