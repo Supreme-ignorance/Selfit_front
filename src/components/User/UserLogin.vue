@@ -17,6 +17,7 @@
                   <v-text-field
                     v-model="password"
                     label="password"
+                    type="password"
                     required
                   ></v-text-field>
                   <div class="mt-3 d-flex flex-row-reverse">

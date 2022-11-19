@@ -7,6 +7,7 @@ export default {
   state: {
     boards: [],
     articles: [],
+    article: null,
   },
   getters: {
     getBoards(state) {
@@ -15,8 +16,11 @@ export default {
     getArticles(state) {
       return state.articles;
     },
-    getArticle: (state) => (idx) => {
-      return state.articles[idx - 1];
+    getArticleId: (state) => (idx) => {
+      return state.articles[idx - 1].articleId;
+    },
+    getArticle(state) {
+      return state.article;
     },
   },
   mutations: {
@@ -25,6 +29,9 @@ export default {
     },
     CALL_ARTICLES(state, list) {
       state.articles = list;
+    },
+    CALL_ARTICLE(state, article) {
+      state.article = article;
     },
   },
   actions: {
@@ -52,6 +59,21 @@ export default {
         .then((res) => {
           console.log("articleList setting...");
           commit("CALL_ARTICLES", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    callArticle({ commit }, articleId) {
+      let API_URL = commonPath + "article/" + articleId;
+      axios({
+        url: API_URL,
+        method: "GET",
+        params: {},
+      })
+        .then((res) => {
+          console.log("article setting...");
+          commit("CALL_ARTICLE", res.data);
         })
         .catch((err) => {
           console.log(err);

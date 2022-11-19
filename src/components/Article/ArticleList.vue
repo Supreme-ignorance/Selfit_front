@@ -1,6 +1,7 @@
 <template>
   <div>
     <router-view />
+    <v-divider></v-divider>
     <v-container>
       <v-layout justify-center>
         <v-simple-table style="width: 90%">
