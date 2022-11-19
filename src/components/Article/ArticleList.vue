@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-view />
     <v-container>
       <v-layout justify-center>
         <v-simple-table style="width: 90%">
@@ -22,8 +23,7 @@
                   :to="{
                     name: 'ArticleDetail',
                     params: {
-                      boardSeq: article.boardSeq,
-                      id: article.articleId,
+                      idx: index + 1,
                     },
                   }"
                 >
@@ -46,11 +46,22 @@
 import { mapGetters } from "vuex";
 export default {
   name: "article-List",
+  data() {
+    return {};
+  },
   computed: {
     ...mapGetters(["getArticles"]),
+    Seq() {
+      return this.$route.params.boardSeq;
+    },
   },
   created() {
     this.$store.dispatch("callArticles", this.$route.params.boardSeq);
+  },
+  watch: {
+    Seq: function (newVal) {
+      this.$store.dispatch("callArticles", newVal);
+    },
   },
   methods: {},
 };

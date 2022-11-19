@@ -21,14 +21,14 @@
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" absolute bottom temporary>
-      <v-list nav dense>
+      <v-list nav>
         <v-list-item-group
           v-model="group"
-          active-class="deep-purple--text text--accent-5"
+          active-class="deep-purple--text text--accent-3"
         >
           <v-list-item>
             <v-list-item-content @click="goUrl('/video')">
-              <v-list-item-title> 비디오 </v-list-item-title>
+              <v-list-item-title class="text-h6"> 비디오 </v-list-item-title>
               <v-list-item-subtitle>
                 이것만 따라하면 당신도 몸짱
               </v-list-item-subtitle>

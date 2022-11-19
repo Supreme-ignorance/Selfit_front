@@ -27,20 +27,6 @@
           </tbody>
         </v-simple-table>
       </v-layout>
-      <br />
-      <div>
-        <v-layout style="width: 90%" justify-end>
-          <select v-model="mode">
-            <option value="1">제목</option>
-            <option value="2">내용</option>
-            <option value="3">제목+내용</option>
-          </select>
-          <input type="text" v-model="keyword" />
-          <v-btn color="blue lighten-4" class="mr-4" @click="search">
-            검색</v-btn
-          >
-        </v-layout>
-      </div>
     </v-container>
   </div>
 </template>

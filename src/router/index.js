@@ -59,17 +59,19 @@ const routes = [
         name: "ArticleList",
         component: ArticleList,
         props: true,
+        children: [
+          {
+            path: ":idx",
+            name: "ArticleDetail",
+            component: ArticleDetail,
+            props: true,
+          },
+        ],
       },
       {
         path: "write",
         name: "ArticleWrite",
         component: ArticleForm,
-      },
-      {
-        path: ":boardSeq/:id",
-        name: "ArticleDetail",
-        component: ArticleDetail,
-        props: true,
       },
       {
         path: "modify",

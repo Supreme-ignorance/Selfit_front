@@ -15,6 +15,9 @@ export default {
     getArticles(state) {
       return state.articles;
     },
+    getArticle: (state) => (idx) => {
+      return state.articles[idx - 1];
+    },
   },
   mutations: {
     CALL_BOARDS(state, list) {
