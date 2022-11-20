@@ -66,17 +66,17 @@ const routes = [
             component: ArticleDetail,
             props: true,
           },
-          {
-            path: "write",
-            name: "ArticleWrite",
-            component: ArticleForm,
-          },
-          {
-            path: "modify",
-            name: "ArticleModify",
-            component: ArticleModify,
-          },
         ],
+      },
+      {
+        path: "write",
+        name: "ArticleWrite",
+        component: ArticleForm,
+      },
+      {
+        path: "modify",
+        name: "ArticleModify",
+        component: ArticleModify,
       },
     ],
   },
