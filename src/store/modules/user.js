@@ -61,10 +61,11 @@ export default {
         },
       })
         .then((res) => {
-          console.log(JSON.stringify(input));
+          res;
           console.log("회원가입 성공");
         })
         .catch((err) => {
+          console.log(JSON.stringify(input));
           console.log(err);
         });
     },

@@ -12,7 +12,7 @@
                 </v-toolbar-title>
               </v-toolbar>
               <div class="pa-5">
-                <v-form ref="form" v-model="valid" lazy-validation>
+                <v-form ref="form" lazy-validation>
                   <v-text-field v-model="id" label="id" required></v-text-field>
                   <v-text-field
                     v-model="password"
@@ -40,15 +40,18 @@ export default {
   name: "LoginForm",
   data() {
     return {
-      user: {
-        id: "",
-        password: "",
-      },
+      id: "",
+      password: "",
     };
   },
   methods: {
     login() {
-      this.$store.dispatch("setLoginUser", this.user);
+      let user = {
+        id: this.id,
+        password: this.password,
+      };
+
+      this.$store.dispatch("setLoginUser", user);
     },
   },
 };

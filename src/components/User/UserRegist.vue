@@ -12,11 +12,11 @@
                 </v-toolbar-title>
               </v-toolbar>
               <div class="pa-5">
-                <v-form ref="form" v-model="valid" lazy-validation>
+                <v-form ref="form" lazy-validation>
                   <v-divider class="mx-4"></v-divider>
-                  <v-text-field v-model="user.id" label="id"></v-text-field>
+                  <v-text-field v-model="id" label="id"></v-text-field>
                   <v-text-field
-                    v-model="user.password"
+                    v-model="password"
                     :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                     label="password"
                     :type="show ? 'text' : 'password'"
@@ -24,13 +24,13 @@
                   ></v-text-field>
                   <v-divider class="mx-4"></v-divider>
 
-                  <v-text-field v-model="user.name" label="name"></v-text-field>
+                  <v-text-field v-model="name" label="name"></v-text-field>
                   <v-text-field
-                    v-model="user.nickname"
+                    v-model="nickname"
                     label="nickname"
                   ></v-text-field>
                   <v-text-field
-                    v-model="user.email"
+                    v-model="email"
                     label="email"
                     type="email"
                   ></v-text-field>
@@ -38,22 +38,22 @@
                   <v-divider class="mx-4"></v-divider>
 
                   <v-text-field
-                    v-model="user.age"
+                    v-model="age"
                     label="age"
                     type="number"
                   ></v-text-field
                   ><v-text-field
-                    v-model="user.height"
+                    v-model="height"
                     label="height"
                     type="number"
                   ></v-text-field
                   ><v-text-field
-                    v-model="user.weight"
+                    v-model="weight"
                     label="weight"
                     type="number"
                   ></v-text-field>
                   <v-select
-                    v-model="user.gender"
+                    v-model="gender"
                     :items="genders"
                     label="gender"
                   ></v-select>
@@ -77,21 +77,28 @@ export default {
   name: "regist-form",
   data() {
     return {
-      user: {
-        id: "",
-        password: "",
-        name: "",
-        nickname: "",
-        gender: "",
-        age: 0,
-      },
+      id: "",
+      password: "",
+      name: "",
+      nickname: "",
+      gender: "",
+      age: 0,
       genders: ["man", "woman"],
       show: false,
     };
   },
   methods: {
     register() {
-      this.$store.dispatch("registUser", this.user);
+      let user = {
+        id: this.id,
+        password: this.password,
+        name: this.name,
+        nickname: this.nickname,
+        gender: this.gender,
+        age: this.age,
+      };
+
+      this.$store.dispatch("registUser", user);
     },
   },
 };
