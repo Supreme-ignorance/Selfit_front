@@ -83,6 +83,9 @@ export default {
       nickname: "",
       gender: "",
       age: 0,
+      email: "",
+      height: 0,
+      weight: 0,
       genders: ["man", "woman"],
       show: false,
     };
@@ -92,10 +95,16 @@ export default {
       let user = {
         id: this.id,
         password: this.password,
+        level: null,
+        exp: null,
         name: this.name,
         nickname: this.nickname,
         gender: this.gender,
         age: this.age,
+        email: this.email,
+        height: this.height,
+        weight: this.weight,
+        InfoDisclose: null,
       };
 
       this.$store.dispatch("registUser", user);

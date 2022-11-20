@@ -51,16 +51,15 @@ export default {
           console.log(err);
         });
     },
-    registUser(input) {
+    registUser({ commit }, user) {
       const API_URL = commonPath + `user/regist`;
       axios({
         url: API_URL,
         method: "POST",
-        data: {
-          user: input,
-        },
+        data: user,
       })
         .then((res) => {
+          commit;
           res;
           console.log("회원가입 성공");
         })
