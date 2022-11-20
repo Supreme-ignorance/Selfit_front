@@ -44,9 +44,7 @@
 
 <script>
 export default {
-  name: "ArticleForm",
-  data() {},
-  methods: {},
+  name: "ReviewForm",
 };
 </script>
 
