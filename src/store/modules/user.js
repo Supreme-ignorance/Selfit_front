@@ -64,6 +64,7 @@ export default {
           console.log("회원가입 성공");
         })
         .catch((err) => {
+          console.log(JSON.stringify(input));
           console.log(err);
         });
     },
