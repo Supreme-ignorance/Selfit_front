@@ -21,7 +21,7 @@
 
       <v-card-text>
         <v-row align="center" class="mx-0">
-          <div class="grey--text">{{ getArticle.writer }}</div>
+          <div class="grey--text">{{ getArticle.writerNickName }}</div>
           <div class="grey--text">&nbsp;| {{ getArticle.regDate }}</div>
           <v-spacer></v-spacer>
           <div class="grey--text">조회수 : {{ getArticle.viewCnt }}</div>

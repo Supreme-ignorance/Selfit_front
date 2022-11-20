@@ -31,7 +31,7 @@
                   {{ article.title }}
                 </router-link>
               </td>
-              <td>{{ article.writer }}</td>
+              <td>{{ article.writerNickName }}</td>
               <td>{{ article.viewCnt }}</td>
             </tr>
           </tbody>
