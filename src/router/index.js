@@ -71,12 +71,12 @@ const routes = [
             name: "ArticleWrite",
             component: ArticleForm,
           },
+          {
+            path: "modify",
+            name: "ArticleModify",
+            component: ArticleModify,
+          },
         ],
-      },
-      {
-        path: "modify",
-        name: "ArticleModify",
-        component: ArticleModify,
       },
     ],
   },
