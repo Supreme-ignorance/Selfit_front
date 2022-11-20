@@ -4,6 +4,11 @@
       <router-view />
     </div>
     <v-divider></v-divider>
+      <div class="mt-3 d-flex flex-row-reverse">
+        <v-btn color="blue lighten-4" elevation="2" class="mr-4" @click="login()">
+          글 쓰기
+        </v-btn>
+      </div>
     <v-container>
       <v-layout justify-center>
         <v-simple-table style="width: 90%">
