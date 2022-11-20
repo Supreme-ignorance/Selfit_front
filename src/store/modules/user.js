@@ -57,7 +57,7 @@ export default {
         url: API_URL,
         method: "POST",
         data: {
-          user: JSON.stringify(input),
+          user: input,
         },
       })
         .then((res) => {
@@ -65,7 +65,6 @@ export default {
           console.log("회원가입 성공");
         })
         .catch((err) => {
-          console.log(JSON.stringify(input));
           console.log(err);
         });
     },

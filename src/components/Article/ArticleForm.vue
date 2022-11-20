@@ -5,8 +5,6 @@
 <script>
 export default {
   name: "ReviewForm",
-  data() {},
-  methods: {},
 };
 </script>
 
