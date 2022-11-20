@@ -5,7 +5,7 @@
     </div>
     <v-divider></v-divider>
     <div class="mt-3 d-flex flex-row-reverse">
-      <v-btn color="blue lighten-4" elevation="2" class="mr-4" @click="login()">
+      <v-btn color="blue lighten-4" elevation="2" class="mr-4" @click="writeArticle()">
         글 쓰기
       </v-btn>
     </div>
