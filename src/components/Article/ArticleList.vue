@@ -1,11 +1,14 @@
 <template>
   <div>
-    <div v-if="getArticles">
-      <router-view />
-    </div>
+    <router-view />
     <v-divider></v-divider>
     <div class="mt-3 d-flex flex-row-reverse">
-      <v-btn color="blue lighten-4" elevation="2" class="mr-4" @click="writeArticle()">
+      <v-btn
+        color="blue lighten-4"
+        elevation="2"
+        class="mr-4"
+        @click="goUrl('ArticleWrite')"
+      >
         글 쓰기
       </v-btn>
     </div>
@@ -71,7 +74,11 @@ export default {
       this.$store.dispatch("callArticles", newVal);
     },
   },
-  methods: {},
+  methods: {
+    goUrl(url) {
+      this.$router.push({ name: url }).catch(() => {});
+    },
+  },
 };
 </script>
 
