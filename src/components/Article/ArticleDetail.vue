@@ -3,17 +3,9 @@
     <v-card
       class="mx-auto my-12 align-start flex-column"
       max-width="500"
-      min-height="500"
       tile
+      outlined
     >
-      <template slot="progress">
-        <v-progress-linear
-          color="deep-purple"
-          height="10"
-          indeterminate
-        ></v-progress-linear>
-      </template>
-
       <v-card-title>{{ getArticle.title }}</v-card-title>
 
       <v-divider class="mx-4"></v-divider>
@@ -38,6 +30,7 @@
       <v-divider class="mx-4"></v-divider>
 
       <v-card-actions>
+        <v-btn color="deep-purple lighten-2" text> 댓글 작성 </v-btn>
         <v-spacer></v-spacer>
         <v-btn color="deep-purple lighten-2" text> 수정 </v-btn>
         <v-btn color="deep-purple lighten-2" text> 삭제 </v-btn>
@@ -45,10 +38,14 @@
 
       <v-divider class="mx-4"></v-divider>
       <v-container v-for="comment in getComments" :key="comment.commentId">
-        <v-card class="mx-auto my-1 align-start flex-column" max-width="450">
+        <v-card
+          class="mx-auto my-1 align-start flex-column"
+          max-width="450"
+          outlined
+        >
           <v-card-text>
             <div class="black--text mb-1">
-              {{ comment.writer }} | {{ comment.regDate }}
+              {{ comment.writerNickname }} | {{ comment.regDate }}
             </div>
             <v-divider class="mx-4"></v-divider>
             <div class="black--text my-1">{{ comment.content }}</div>

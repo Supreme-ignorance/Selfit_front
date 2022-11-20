@@ -40,18 +40,15 @@ export default {
   name: "LoginForm",
   data() {
     return {
-      id: "",
-      password: "",
+      user: {
+        id: "",
+        password: "",
+      },
     };
   },
   methods: {
     login() {
-      let user = {
-        id: this.id,
-        password: this.password,
-      };
-
-      this.$store.dispatch("setLoginUser", user);
+      this.$store.dispatch("setLoginUser", this.user);
     },
   },
 };

@@ -3,7 +3,7 @@ import axios from "axios";
 
 const commonPath = "http://localhost:9999/api/";
 
-const user = {
+export default {
   namespaced: false,
   state: {
     loginUser: null,
@@ -51,8 +51,23 @@ const user = {
           console.log(err);
         });
     },
+    registUser(input) {
+      const API_URL = commonPath + `user/regist`;
+      axios({
+        url: API_URL,
+        method: "POST",
+        data: {
+          user: JSON.stringify(input),
+        },
+      })
+        .then((res) => {
+          console.log(JSON.stringify(input));
+          console.log("회원가입 성공");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   modules: {},
 };
-
-export default user;

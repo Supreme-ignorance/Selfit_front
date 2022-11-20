@@ -3,7 +3,7 @@
     <div v-if="getArticles">
       <router-view />
     </div>
-    <v-divider></v-divider>
+    <v-divider class="mx-15" />
     <v-container>
       <v-layout justify-center>
         <v-simple-table style="width: 90%">
