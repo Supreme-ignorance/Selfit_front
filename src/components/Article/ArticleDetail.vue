@@ -32,7 +32,13 @@
       <v-card-actions>
         <v-btn color="deep-purple lighten-2" text> 댓글 작성 </v-btn>
         <v-spacer></v-spacer>
-        <v-btn color="deep-purple lighten-2" text> 수정 </v-btn>
+        <v-btn
+          color="deep-purple lighten-2"
+          text
+          @click="goUrl('ArticleModify')"
+        >
+          수정
+        </v-btn>
         <v-btn color="deep-purple lighten-2" text> 삭제 </v-btn>
       </v-card-actions>
 
@@ -75,7 +81,11 @@ export default {
       return this.getArticleId(this.$route.params.idx);
     },
   },
-  methods: {},
+  methods: {
+    goUrl(url) {
+      this.$router.push({ name: url }).catch(() => {});
+    },
+  },
   created() {
     this.$store.dispatch("callArticle", this.$route.params.idx);
     this.$store.dispatch("callcomments", this.$route.params.idx);
