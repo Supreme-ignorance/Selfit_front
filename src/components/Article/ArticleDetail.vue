@@ -1,9 +1,8 @@
 <template>
-  <div>
+  <div v-if="getArticle">
     <v-card
-      :loading="loading"
       class="mx-auto my-12 align-start flex-column"
-      max-width="600"
+      max-width="500"
       min-height="500"
       tile
     >
@@ -45,14 +44,23 @@
       </v-card-actions>
 
       <v-divider class="mx-4"></v-divider>
-      <v-container>
-        <v-card
-          class="mx-auto my-2 align-start flex-column"
-          max-width="550"
-          min-height="100"
-        >
-        </v-card
-      ></v-container>
+      <v-container v-for="comment in getComments" :key="comment.commentId">
+        <v-card class="mx-auto my-1 align-start flex-column" max-width="450">
+          <v-card-text>
+            <div class="black--text mb-1">
+              {{ comment.writer }} | {{ comment.regDate }}
+            </div>
+            <v-divider class="mx-4"></v-divider>
+            <div class="black--text my-1">{{ comment.content }}</div>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="deep-purple lighten-2" text> 수정 </v-btn>
+            <v-btn color="deep-purple lighten-2" text> 삭제 </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-container>
     </v-card>
   </div>
 </template>
@@ -65,14 +73,21 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["getArticleId", "getArticle"]),
+    ...mapGetters(["getArticleId", "getArticle", "getComments"]),
     id() {
       return this.getArticleId(this.$route.params.idx);
     },
   },
   methods: {},
   created() {
-    this.$store.dispatch("callArticle", this.id);
+    this.$store.dispatch("callArticle", this.$route.params.idx);
+    this.$store.dispatch("callcomments", this.$route.params.idx);
+  },
+  watch: {
+    id: function (newVal) {
+      this.$store.dispatch("callArticle", newVal);
+      this.$store.dispatch("callcomments", newVal);
+    },
   },
 };
 </script>

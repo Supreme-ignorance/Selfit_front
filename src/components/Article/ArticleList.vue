@@ -1,6 +1,8 @@
 <template>
   <div>
-    <router-view />
+    <div v-if="getArticles">
+      <router-view />
+    </div>
     <v-divider></v-divider>
     <v-container>
       <v-layout justify-center>
