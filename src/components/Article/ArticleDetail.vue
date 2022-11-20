@@ -30,7 +30,9 @@
       <v-divider class="mx-4"></v-divider>
 
       <v-card-actions>
-        <v-btn color="deep-purple lighten-2" text> 댓글 작성 </v-btn>
+        <v-btn color="deep-purple lighten-2" text @click="goCommentForm()">
+          댓글 작성
+        </v-btn>
         <v-spacer></v-spacer>
         <v-btn
           color="deep-purple lighten-2"
@@ -43,27 +45,8 @@
       </v-card-actions>
 
       <v-divider class="mx-4"></v-divider>
-      <v-container v-for="comment in getComments" :key="comment.commentId">
-        <v-card
-          class="mx-auto my-1 align-start flex-column"
-          max-width="450"
-          outlined
-        >
-          <v-card-text>
-            <div class="black--text mb-1">
-              {{ comment.writerNickname }} | {{ comment.regDate }}
-            </div>
-            <v-divider class="mx-4"></v-divider>
-            <div class="black--text my-1">{{ comment.content }}</div>
-          </v-card-text>
 
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="deep-purple lighten-2" text> 수정 </v-btn>
-            <v-btn color="deep-purple lighten-2" text> 삭제 </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-container>
+      <router-view />
     </v-card>
   </div>
 </template>
@@ -76,7 +59,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["getArticleId", "getArticle", "getComments"]),
+    ...mapGetters(["getArticleId", "getArticle"]),
     id() {
       return this.getArticleId(this.$route.params.idx);
     },
@@ -85,15 +68,16 @@ export default {
     goUrl(url) {
       this.$router.push({ name: url }).catch(() => {});
     },
+    goCommentForm() {
+      this.$router.push({ name: "CommentForm" }).catch(() => {});
+    },
   },
   created() {
     this.$store.dispatch("callArticle", this.$route.params.idx);
-    this.$store.dispatch("callcomments", this.$route.params.idx);
   },
   watch: {
     id: function (newVal) {
       this.$store.dispatch("callArticle", newVal);
-      this.$store.dispatch("callcomments", newVal);
     },
   },
 };

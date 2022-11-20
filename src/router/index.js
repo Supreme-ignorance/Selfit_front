@@ -19,6 +19,9 @@ import LikedVideoList from "../components/Video/LikedVideoList.vue";
 import VideoDetail from "../components/Video/VideoDetail.vue";
 import VideoList from "../components/Video/VideoList.vue";
 
+import CommentList from "../components/Article/Comment/CommentList.vue";
+import CommentForm from "../components/Article/Comment/CommentForm.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -64,7 +67,20 @@ const routes = [
             path: ":idx",
             name: "ArticleDetail",
             component: ArticleDetail,
-            props: true,
+            children: [
+              {
+                path: "",
+                name: "CommentList",
+                component: CommentList,
+                children: [
+                  {
+                    path: "cw",
+                    name: "CommentForm",
+                    component: CommentForm,
+                  },
+                ],
+              },
+            ],
           },
         ],
       },

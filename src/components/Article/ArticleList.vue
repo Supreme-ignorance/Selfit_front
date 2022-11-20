@@ -32,7 +32,7 @@
               <td>
                 <router-link
                   :to="{
-                    name: 'ArticleDetail',
+                    name: 'CommentList',
                     params: {
                       idx: index + 1,
                     },
