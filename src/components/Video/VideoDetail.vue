@@ -2,15 +2,28 @@
   <div v-if="getVideo">
     <v-card
       class="mx-auto my-12 align-start flex-column"
-      max-width="500"
+      max-width="1000"
       tile
       outlined
     >
-      <v-card-title>{{ getArticle.title }}</v-card-title>
+      <v-card-title>{{ getVideo.title }} | {{getVideo.videoType}}</v-card-title>
+      <div>
+        <v-col align="center" class="mx-0">
+          <iframe 
+          width="700" 
+          height="400" 
+          :src="`https://www.youtube.com/embed/${getVideo.videoId}`" 
+          title="YouTube video player" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>
+        </v-col>     
+      </div>
+      
 
       <v-divider class="mx-4"></v-divider>
 
-      <v-card-text>
+      <!-- <v-card-text>
         <v-row align="center" class="mx-0">
           <div class="grey--text">{{ getArticle.writerNickName }}</div>
           <div class="grey--text">&nbsp;| {{ getArticle.regDate }}</div>
@@ -44,7 +57,7 @@
         <v-btn color="deep-purple lighten-2" text> 삭제 </v-btn>
       </v-card-actions>
 
-      <v-divider class="mx-4"></v-divider>
+      <v-divider class="mx-4"></v-divider> -->
 
       <router-view />
     </v-card>
