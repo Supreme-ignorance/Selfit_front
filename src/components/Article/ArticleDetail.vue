@@ -52,13 +52,14 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 export default {
   name: "article-detail",
   data() {
     return {};
   },
   computed: {
+    ...mapState(["articles"]),
     ...mapGetters(["getArticleId", "getArticle", "getContentWidth"]),
     id() {
       return this.getArticleId(this.$route.params.idx);
@@ -73,11 +74,37 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("callArticle", this.$route.params.idx);
+    this.$store
+      .dispatch("callBoardsPromise")
+      .then(() => {
+        return this.$store.dispatch(
+          "callArticlesPromise",
+          this.$route.params.boardSeq
+        );
+      })
+      .then((data) => {
+        this.$store.dispatch(
+          "callArticle",
+          data[this.$route.params.idx - 1].articleId
+        );
+      });
   },
   watch: {
-    id: function (newVal) {
-      this.$store.dispatch("callArticle", newVal);
+    id: function () {
+      this.$store
+        .dispatch("callBoardsPromise")
+        .then(() => {
+          return this.$store.dispatch(
+            "callArticlesPromise",
+            this.$route.params.boardSeq
+          );
+        })
+        .then((data) => {
+          this.$store.dispatch(
+            "callArticle",
+            data[this.$route.params.idx - 1].articleId
+          );
+        });
     },
   },
 };

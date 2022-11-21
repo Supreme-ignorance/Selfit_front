@@ -67,11 +67,11 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("callArticles", this.$route.params.boardSeq);
+    this.$store.dispatch("callArticlesPromise", this.$route.params.boardSeq);
   },
   watch: {
     Seq: function (newVal) {
-      this.$store.dispatch("callArticles", newVal);
+      this.$store.dispatch("callArticlesPromise", newVal);
     },
   },
   methods: {

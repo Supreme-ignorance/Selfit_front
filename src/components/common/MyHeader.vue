@@ -99,7 +99,7 @@ export default {
   },
 
   created() {
-    this.$store.dispatch("callBoards");
+    this.$store.dispatch("callBoardsPromise");
   },
 };
 </script>

@@ -16,9 +16,6 @@ export default {
     getArticles(state) {
       return state.articles;
     },
-    getArticleId: (state) => (idx) => {
-      return state.articles[idx - 1].articleId;
-    },
     getArticle(state) {
       return state.article;
     },
@@ -35,34 +32,44 @@ export default {
     },
   },
   actions: {
-    callBoards({ commit }) {
-      let API_URL = commonPath + "board/";
-      axios({
-        url: API_URL,
-        method: "GET",
-      })
-        .then((res) => {
-          console.log("boardList setting...");
-          commit("CALL_BOARDS", res.data);
+    callBoardsPromise({ commit }) {
+      return new Promise((response, reject) => {
+        // 비동기 작업
+        let API_URL = commonPath + "board/";
+        axios({
+          url: API_URL,
+          method: "GET",
         })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            console.log("boardList setting...");
+            commit("CALL_BOARDS", res.data);
+            response(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
     },
-    callArticles({ commit }, boardSeq) {
-      let API_URL = commonPath + "article/list/" + boardSeq;
-      axios({
-        url: API_URL,
-        method: "GET",
-        params: {},
-      })
-        .then((res) => {
-          console.log("articleList setting...");
-          commit("CALL_ARTICLES", res.data);
+    callArticlesPromise({ commit }, boardSeq) {
+      return new Promise((response, reject) => {
+        // 비동기 작업
+        let API_URL = commonPath + "article/list/" + boardSeq;
+        axios({
+          url: API_URL,
+          method: "GET",
+          params: {},
         })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            console.log("articleList setting...");
+            commit("CALL_ARTICLES", res.data);
+            response(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
     },
     callArticle({ commit }, articleId) {
       let API_URL = commonPath + "article/" + articleId;
