@@ -2,24 +2,27 @@
   <div v-if="getVideo">
     <v-card
       class="mx-auto my-12 align-start flex-column"
-      max-width="1000"
+      :max-width="getContentWidth"
       tile
       outlined
     >
-      <v-card-title>{{ getVideo.title }} | {{getVideo.videoType}}</v-card-title>
+      <v-card-title
+        >{{ getVideo.title }} | {{ getVideo.videoType }}</v-card-title
+      >
       <div>
         <v-col align="center" class="mx-0">
-          <iframe 
-          width="700" 
-          height="400" 
-          :src="`https://www.youtube.com/embed/${getVideo.videoId}`" 
-          title="YouTube video player" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          <iframe
+            width="700"
+            height="400"
+            :src="`https://www.youtube.com/embed/${getVideo.videoId}`"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          >
           </iframe>
-        </v-col>     
+        </v-col>
       </div>
-      
 
       <v-divider class="mx-4"></v-divider>
 
@@ -69,7 +72,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "video-Detail",
   computed: {
-    ...mapGetters(["getVideo"]),
+    ...mapGetters(["getVideo", "getContentWidth"]),
   },
   created() {
     this.$store.dispatch("setVideo", this.$route.params.videoId);
