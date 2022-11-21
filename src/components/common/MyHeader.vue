@@ -4,10 +4,14 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-spacer></v-spacer>
-
-      <v-toolbar-title>
-        <router-link :to="{ name: 'home' }" id="title"> SELFIT </router-link>
-      </v-toolbar-title>
+      <router-link :to="{ name: 'home' }" id="nav_a">
+        <v-img
+          src="@/assets/selfit_logo_smallest.png"
+          transition="scale-transition"
+          max-width="170"
+          max-height="55"
+        />
+      </router-link>
 
       <v-spacer></v-spacer>
       <div v-if="getUser">
