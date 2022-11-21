@@ -27,21 +27,56 @@ export default {
     logout({ commit }) {
       commit("LOGOUT");
     },
-    setLoginUser({ commit }, user) {
+    setLoginUser({ commit }, login) {
       const API_URL = commonPath + `user/login`;
       axios({
         url: API_URL,
         method: "POST",
-        params: {
-          id: user.id,
-          password: user.password,
-        },
+        data: login,
       })
         .then((res) => {
           if (res.data["message"] == "success") {
             alert("로그인 성공!");
             commit("SET_LOGIN_USER", res.data["loginUser"]);
             sessionStorage.setItem("access-token", res.data["access-token"]);
+            sessionStorage.setItem("currentLogin_id", res.data["loginUser"].id);
+            sessionStorage.setItem(
+              "currentLogin_level",
+              res.data["loginUser"].level
+            );
+            sessionStorage.setItem(
+              "currentLogin_exp",
+              res.data["loginUser"].exp
+            );
+            sessionStorage.setItem(
+              "currentLogin_name",
+              res.data["loginUser"].name
+            );
+            sessionStorage.setItem(
+              "currentLogin_height",
+              res.data["loginUser"].height
+            );
+            sessionStorage.setItem(
+              "currentLogin_weight",
+              res.data["loginUser"].weight
+            );
+            sessionStorage.setItem(
+              "currentLogin_nickname",
+              res.data["loginUser"].nickname
+            );
+            sessionStorage.setItem(
+              "currentLogin_email",
+              res.data["loginUser"].email
+            );
+            sessionStorage.setItem(
+              "currentLogin_age",
+              res.data["loginUser"].age
+            );
+            sessionStorage.setItem(
+              "currentLogin_gender",
+              res.data["loginUser"].gender
+            );
+            commit("SET_LOGIN_USER", res.data["loginUser"].id);
             router.push("/");
           } else {
             alert("로그인 실패!");

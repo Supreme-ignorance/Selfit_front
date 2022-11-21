@@ -10,8 +10,10 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-
-      <a href="#" v-if="getUser" @click="logout" id="nav_a">로그아웃</a>
+      <div v-if="getUser">
+        <a href="#" id="nav_a">{{ getNickName }}님 안녕하세요</a>
+        <a href="#" @click="logout" id="nav_a">로그아웃</a>
+      </div>
       <div v-else>
         <router-link :to="{ name: 'login' }" id="nav_a"> 로그인 </router-link>
         <router-link :to="{ name: 'regist' }" id="nav_a">
@@ -79,6 +81,10 @@ export default {
       } else {
         return false;
       }
+    },
+    getNickName() {
+      console.log(this.$session.get("currentLogin_nickname"));
+      return this.$session.get("currentLogin_nickname");
     },
   },
 
