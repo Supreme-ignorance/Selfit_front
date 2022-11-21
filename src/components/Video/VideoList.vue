@@ -1,31 +1,22 @@
 <template>
   <div>
     <v-container>
-      <v-layout justify-center>
-        <v-simple-table style="width: 90%">
-          <thead>
-            <tr>
-              <th>제목</th>
-              <th>채널명</th>
-              <th>운동 부위</th>
-              <th>조회수</th>
-              <th>좋아요</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="video in getVideos" :key="video.videoId">
-              <td>
-                <router-link :to="`/video/${video.videoId}`">
-                  {{ video.title }}
-                </router-link>
-              </td>
-              <td>{{ video.channelName }}</td>
-              <td>{{ video.workoutPart }}</td>
-              <td>{{ video.viewCnt }}</td>
-              <td>{{ video.likeCnt }}</td>
-            </tr>
-          </tbody>
-        </v-simple-table>
+      <v-layout justify-center style="width: 90%">
+        <v-row>
+          <div v-for="video in getVideos" :key="video.videoId">
+            <v-card @click="goUrl(video.videoId)"   class="mx-auto my-12" max-width="374">
+            <v-img height="250" :src="`https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`"></v-img>
+            <v-card-title>{{video.title}}</v-card-title>
+            <v-divider class="mx-4"></v-divider>
+            <v-card-text>
+              <div class="text-subtitle-1">{{ video.channelName }} | 👀 {{video.viewCnt}} | 💜 {{video.likeCnt}}</div>
+            </v-card-text>
+          </v-card>
+
+          </div>
+          
+        </v-row>
+        
       </v-layout>
     </v-container>
   </div>
@@ -40,6 +31,11 @@ export default {
   },
   created() {
     this.$store.dispatch("setVideoList");
+  },
+  methods: {
+    goUrl(videoId) {
+      this.$router.push(`/video/${videoId}`).catch(() => {})
+    },
   },
 };
 </script>

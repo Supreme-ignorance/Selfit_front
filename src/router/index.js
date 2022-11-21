@@ -103,12 +103,12 @@ const routes = [
     children: [
       {
         path: "likedlist",
-        name: "likedvideolist",
+        name: "LikedVideoList",
         component: LikedVideoList,
       },
       {
-        path: "detail",
-        name: "videodetail",
+        path: ":videoId",
+        name: "videoDetail",
         component: VideoDetail,
       },
       {
