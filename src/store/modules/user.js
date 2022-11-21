@@ -20,8 +20,7 @@ export default {
       state.loginUser = null;
     },
     SET_LOGIN_USER(state, id) {
-      let user = { id };
-      state.loginUser = user;
+      state.loginUser = id;
     },
   },
   actions: {
