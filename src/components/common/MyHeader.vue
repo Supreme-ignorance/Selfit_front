@@ -1,12 +1,12 @@
 <template>
   <header>
-    <v-app-bar color="deep-purple accent-4" dark>
+    <v-app-bar color="deep-purple accent-4" height="90" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-spacer></v-spacer>
 
       <v-toolbar-title>
-        <router-link :to="{ name: 'home' }" id="nav_a"> SELFIT </router-link>
+        <router-link :to="{ name: 'home' }" id="title"> SELFIT </router-link>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -108,5 +108,13 @@ export default {
   margin: 10px;
   text-decoration: none;
   color: white;
+}
+
+#title {
+  margin: 10px;
+  text-decoration: none;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
 }
 </style>

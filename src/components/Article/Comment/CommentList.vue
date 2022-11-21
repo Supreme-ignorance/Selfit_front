@@ -87,6 +87,22 @@ export default {
           );
         });
     },
+    getComments: function () {
+      this.$store
+        .dispatch("callBoardsPromise")
+        .then(() => {
+          return this.$store.dispatch(
+            "callArticlesPromise",
+            this.$route.params.boardSeq
+          );
+        })
+        .then((data) => {
+          this.$store.dispatch(
+            "callcomments",
+            data[this.$route.params.idx - 1].articleId
+          );
+        });
+    },
   },
 };
 </script>
