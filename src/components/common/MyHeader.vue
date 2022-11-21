@@ -83,8 +83,7 @@ export default {
       }
     },
     getNickName() {
-      console.log(this.$session.get("currentLogin_nickname"));
-      return this.$session.get("currentLogin_nickname");
+      return sessionStorage.getItem("currentLogin_nickname");
     },
   },
 
