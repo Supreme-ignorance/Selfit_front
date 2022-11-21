@@ -2,7 +2,7 @@
   <div v-if="getArticle">
     <v-card
       class="mx-auto my-12 align-start flex-column"
-      max-width="500"
+      :max-width="getContentWidth"
       tile
       outlined
     >
@@ -22,7 +22,7 @@
       <v-divider class="mx-4"></v-divider>
 
       <v-card-text class="black--text">
-        <div>
+        <div class="my-10 mx-5">
           {{ getArticle.content }}
         </div>
       </v-card-text>
@@ -59,7 +59,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["getArticleId", "getArticle"]),
+    ...mapGetters(["getArticleId", "getArticle", "getContentWidth"]),
     id() {
       return this.getArticleId(this.$route.params.idx);
     },
