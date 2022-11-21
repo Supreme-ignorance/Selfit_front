@@ -8,8 +8,14 @@ import comment from "./modules/comment";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  getters: {},
+  state: {
+    contentWidth: 1000,
+  },
+  getters: {
+    getContentWidth(state) {
+      return state.contentWidth;
+    },
+  },
   mutations: {},
   actions: {},
   modules: { user, video, board, comment },

@@ -6,7 +6,7 @@
     <v-container v-for="comment in getComments" :key="comment.commentId">
       <v-card
         class="mx-auto my-1 align-start flex-column"
-        max-width="450"
+        :max-width="getContentWidth * 0.9"
         outlined
       >
         <v-card-text>
@@ -41,7 +41,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["getArticleId", "getComments"]),
+    ...mapGetters(["getArticleId", "getComments", "getContentWidth"]),
     id() {
       return this.getArticleId(this.$route.params.idx);
     },
