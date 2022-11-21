@@ -1,25 +1,32 @@
 import axios from "axios";
 
-const commonPath = "http://localhost:9999/api/";
+const commonPath = "http://localhost:9999/api/video/";
 
 export default {
   namespaced: false,
   state: {
     videos: [],
+    video: null,
   },
   getters: {
     getVideos(state) {
       return state.videos;
+    },
+    getVideo(state) {
+      return state.video;
     },
   },
   mutations: {
     SET_VIDEO_LIST(state, videos) {
       state.videos = videos;
     },
+    SET_VIDEO(state, video) {
+      state.video = video;
+    },
   },
   actions: {
     async setVideoList({ commit }) {
-      const API_URL = commonPath + `video/list`;
+      const API_URL = commonPath + `list`;
       console.log();
       try {
         const res = await axios({
@@ -34,6 +41,19 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+    setVideo({ commit }, videoId) {
+      const API_URL = commonPath + "one/" + videoId;
+      axios({
+        url: API_URL,
+        method: "GET",
+      })
+        .then((res) => {
+          commit("SET_VIDEO", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   modules: {},

@@ -52,11 +52,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-
-}
+  name: "video-Detail",
+  computed: {
+    ...mapGetters(["getVideo"]),
+  },
+  created() {
+    this.$store.dispatch("setVideo", this.$route.params.videoId);
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
