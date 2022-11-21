@@ -6,7 +6,7 @@ const commonPath = "http://localhost:9999/api/";
 export default {
   namespaced: false,
   state: {
-    loginUser: null,
+    loginUser: sessionStorage.getItem("currentLogin_id"),
     boards: [],
   },
   getters: {
@@ -16,6 +16,7 @@ export default {
   },
   mutations: {
     LOGOUT(state) {
+      sessionStorage.clear();
       state.loginUser = null;
     },
     SET_LOGIN_USER(state, id) {
