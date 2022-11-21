@@ -36,6 +36,7 @@ export default {
   },
   computed: {
     ...mapGetters(["getContentWidth"]),
+    getMy,
   },
 };
 </script>
