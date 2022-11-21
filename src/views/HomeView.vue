@@ -2,7 +2,11 @@
   <div>
     <div>
       <v-banner id="banner" class="pa-0" dark>
-      <v-carousel id="carousel" hide-delimiters>
+      <v-carousel id="carousel" hide-delimiter
+      cycle
+      height="700"
+      hide-delimiter-background
+      show-arrows-on-hover>
         <v-carousel-item
           v-for="(item, i) in items"
           :key="i"
