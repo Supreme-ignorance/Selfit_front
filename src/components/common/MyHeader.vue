@@ -1,6 +1,6 @@
 <template>
   <header>
-    <v-app-bar color="deep-purple accent-4" height="90" dark>
+    <v-app-bar color="purple darken-3" height="90" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-spacer></v-spacer>

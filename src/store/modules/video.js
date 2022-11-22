@@ -32,9 +32,28 @@ export default {
     },
   },
   actions: {
+    setLikedVideo({ commit }, payload) {
+      return new Promise((res, rej) => {
+        const API_URL = commonPath + `like`;
+        axios({
+          url: API_URL,
+          method: "POST",
+          params: {
+            id: payload.id,
+            videoId: payload.videoId,
+          },
+        })
+          .then((response) => {
+            commit;
+            res(response.data);
+          })
+          .catch((err) => {
+            rej(err);
+          });
+      });
+    },
     async setVideoList({ commit }) {
       const API_URL = commonPath + `list`;
-      console.log();
       try {
         const res = await axios({
           url: API_URL,
