@@ -6,6 +6,7 @@ export default {
   namespaced: false,
   state: {
     videos: [],
+    likedVideo: [],
     video: null,
   },
   getters: {
