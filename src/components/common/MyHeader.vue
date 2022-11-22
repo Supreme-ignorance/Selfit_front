@@ -43,6 +43,13 @@
             </v-list-item-content>
           </v-list-item>
 
+          <v-list-item v-if="getNickName">
+            <v-list-item-content @click="goUrl('/likedlist')">
+              <v-list-item-title class="text-h6"> 좋아요 </v-list-item-title>
+              <v-list-item-subtitle> 우리 모두 좋아요 </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
           <v-divider></v-divider>
 
           <v-list-item
@@ -66,6 +73,12 @@
 import { mapGetters } from "vuex";
 export default {
   name: "MyHeader",
+  data() {
+    return {
+      drawer: false,
+      group: null,
+    };
+  },
   methods: {
     logout() {
       this.$store.dispatch("logout");
@@ -92,11 +105,6 @@ export default {
       return sessionStorage.getItem("currentLogin_nickname");
     },
   },
-
-  data: () => ({
-    drawer: false,
-    group: null,
-  }),
 
   watch: {
     group() {
