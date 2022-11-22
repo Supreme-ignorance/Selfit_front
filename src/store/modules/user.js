@@ -21,6 +21,9 @@ export default {
     getDaily(state) {
       return state.daily;
     },
+    getUserInfo(state) {
+      return state.userInfo;
+    },
   },
   mutations: {
     SET_DAILY(state, daily) {
