@@ -6,7 +6,7 @@ export default {
   namespaced: false,
   state: {
     videos: [],
-    likedVideo: [],
+    likedVideos: [],
     video: null,
   },
   getters: {
@@ -16,6 +16,9 @@ export default {
     getVideo(state) {
       return state.video;
     },
+    getLikedVideos(state) {
+      return state.likedVideos;
+    }
   },
   mutations: {
     SET_VIDEO_LIST(state, videos) {
@@ -24,6 +27,9 @@ export default {
     SET_VIDEO(state, video) {
       state.video = video;
     },
+    GET_LIKEDVIDEO_LIST(state, likedVideos) {
+      state.likedVideos = likedVideos;
+    }
   },
   actions: {
     async setVideoList({ commit }) {
@@ -55,6 +61,23 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    async getLikedVideoList({ commit }, id) {
+      const API_URL = commonPath + "likedlist/" + id;
+      console.log();
+      try {
+        const res = await axios({
+          url: API_URL,
+          method: "GET",
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
+        });
+        console.log("getting likedvideo list...");
+        commit("GET_LIKEDVIDEO_LIST", res.data);
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
   modules: {},
