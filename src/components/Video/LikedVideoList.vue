@@ -41,12 +41,13 @@ export default {
   },
   created() {
     let id = sessionStorage.getItem("currentLogin_id");
+    console.log(id);
     if (id == null) this.$router.go(-1);
     this.$store.dispatch("getLikedVideoList", id);
   },
   methods: {
-    goUrl(id) {
-      this.$router.push(`/likedvideo/${id}`).catch(() => {});
+    goUrl(videoId) {
+      this.$router.push(`/video/${videoId}`).catch(() => {});
     },
   },
 };
