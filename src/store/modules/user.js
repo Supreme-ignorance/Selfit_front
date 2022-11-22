@@ -9,6 +9,7 @@ export default {
     loginUser: sessionStorage.getItem("currentLogin_id"),
     boards: [],
     daily: [],
+    userInfo: null,
   },
   getters: {
     getLoginUser(state) {
@@ -29,6 +30,9 @@ export default {
     SET_LOGIN_USER(state, id) {
       state.loginUser = id;
     },
+    GET_USER_INFO(state, userInfo) {
+      state.userInfo = userInfo;
+    }
   },
   actions: {
     setDaily({ commit }, id) {
@@ -49,6 +53,19 @@ export default {
             reject(err);
           });
       });
+    },
+    getUserInfo({commit}, id) {
+      const API_URL = commonPath + "user/" + id;
+      axios({
+        url: API_URL,
+        method: "GET",
+      })
+        .then((res) => {
+          commit("GET_INFO", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     logout({ commit }) {
       commit("LOGOUT");
