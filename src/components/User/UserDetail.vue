@@ -10,7 +10,7 @@
         <v-row dense>
           <v-col cols="12">
             <v-card color="#385F73" dark>
-              <v-card-title class="text-h5"> Unlimited music now </v-card-title>
+              <v-card-title class="text-h5"> Level {{}} </v-card-title>
 
               <v-container>
                 <v-progress-linear
@@ -31,7 +31,7 @@
 
               <v-container>
                 <CalendarHeatmap :end-date="Date.now()" 
-                :range-color="['ebedf0', 'dae2ef', '#c0ddf9', '#73b3f3', '#3886e1', '#17459e']"
+                :range-color="['#F5F5F5', '#D1C4E9', '#B39DDB', '#9575CD', '#673AB7']"
                 :values="getDaily"
               /></v-container>
 
@@ -60,6 +60,9 @@ export default {
     ...mapGetters(["getDaily", "getContentWidth"]),
   },
   created() {
+    let id = sessionStorage.getItem("currentLogin_id");
+    console.log(id);
+    if (id == null) this.$router.go(-1);
     this.$store.dispatch("setDaily", "ssafy");
   },
 };
