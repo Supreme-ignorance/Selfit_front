@@ -2,7 +2,7 @@
   <div>
     <v-card
       class="mx-auto my-12 align-start flex-column"
-      :max-width="getContentWidth"
+      :max-width="getContentWidth * 0.7"
       tile
       outlined
     >

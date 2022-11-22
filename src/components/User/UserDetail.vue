@@ -4,18 +4,22 @@
       <v-img src="@/assets/jogging_road_cut.jpg" height="300"></v-img>
     </v-banner>
     <v-card
-    class="mx-auto my-12 align-center flex-column"
-    :max-width="getContentWidth"
-    tile
-    outlined
+      class="mx-auto my-12 align-center flex-column"
+      :max-width="getContentWidth"
+      tile
+      outlined
     >
-    <v-container>
-      <v-img src="@/assets/profile.png" width="100" class="mx-10 my-10"></v-img>
-      <div v-if="getUserInfo">
-        <h3 class="mx-10 my-10">
-          {{getUserInfo.nickname}}
-        </h3>
-      </div>
+      <v-container>
+        <v-img
+          src="@/assets/profile.png"
+          width="100"
+          class="mx-10 my-10"
+        ></v-img>
+        <div v-if="getUserInfo">
+          <h3 class="mx-10 my-10">
+            {{ getUserInfo.nickname }}
+          </h3>
+        </div>
         <v-row dense>
           <v-col cols="12">
             <v-card-text>
@@ -29,7 +33,8 @@
               </v-row>
             </v-card-text>
             <v-card color="#385F73" dark>
-              <v-card-title class="text-h5"> Level {{getUserInfo.level}} 
+              <v-card-title class="text-h5">
+                Level {{ getUserInfo.level }}
                 <v-spacer></v-spacer>
                 레벨업까지 {{ getUserInfo.exp }} exp
               </v-card-title>
@@ -51,14 +56,19 @@
               <v-card-title class="text-h5"> 데일리 운동 기록 </v-card-title>
 
               <v-container>
-                <CalendarHeatmap :end-date="Date.now()" 
-                :range-color="['#F5F5F5', '#D1C4E9', '#B39DDB', '#9575CD', '#673AB7']"
-                :values="getDaily"
+                <CalendarHeatmap
+                  :end-date="Date.now()"
+                  :range-color="[
+                    '#F5F5F5',
+                    '#D1C4E9',
+                    '#B39DDB',
+                    '#9575CD',
+                    '#673AB7',
+                  ]"
+                  :values="getDaily"
               /></v-container>
 
-              <v-card-subtitle
-                ></v-card-subtitle
-              >
+              <v-card-subtitle></v-card-subtitle>
             </v-card>
           </v-col>
         </v-row>
@@ -80,17 +90,13 @@ export default {
     ...mapGetters(["getDaily", "getContentWidth", "getUserInfo"]),
     callUser() {
       return this.$route.params.id;
-    }
+    },
   },
   created() {
     this.$store.dispatch("setDaily", this.callUser);
-    this.$store.dispatch("setUserInfo", this.callUser)
+    this.$store.dispatch("setUserInfo", this.callUser);
   },
-  
-  
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

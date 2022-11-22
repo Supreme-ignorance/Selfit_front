@@ -18,6 +18,27 @@ export default {
     },
   },
   actions: {
+    deleteComment({ commit }, commentId) {
+      return new Promise((response, reject) => {
+        let API_URL = commonPath + "delete/" + commentId;
+        axios({
+          url: API_URL,
+          method: "DELETE",
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
+        })
+          .then((res) => {
+            console.log("comment delete...");
+            commit;
+            response(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
+    },
     callcomments({ commit }, articleId) {
       let API_URL = commonPath + articleId;
       axios({
