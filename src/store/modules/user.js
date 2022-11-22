@@ -18,6 +18,9 @@ export default {
     getDaily(state) {
       return state.daily;
     },
+    getUserInfo(state) {
+      return state.userInfo;
+    }
   },
   mutations: {
     SET_DAILY(state, daily) {
@@ -54,7 +57,7 @@ export default {
           });
       });
     },
-    getUserInfo({commit}, id) {
+    setUserInfo({commit}, id) {
       const API_URL = commonPath + "user/" + id;
       axios({
         url: API_URL,
