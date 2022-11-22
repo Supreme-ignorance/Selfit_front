@@ -15,7 +15,7 @@
 
       <v-spacer></v-spacer>
       <div v-if="getUser">
-        <router-link :to="{ name: 'detail' }" id="nav_a">
+        <router-link :to="{ name: 'detail', params: { id: getId } }" id="nav_a">
           {{ getNickName }}님 안녕하세요
         </router-link>
         <a href="#" @click="logout" id="nav_a">로그아웃</a>
@@ -103,6 +103,9 @@ export default {
     },
     getNickName() {
       return sessionStorage.getItem("currentLogin_nickname");
+    },
+    getId() {
+      return sessionStorage.getItem("currentLogin_id");
     },
   },
 
