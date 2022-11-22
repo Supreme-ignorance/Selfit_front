@@ -57,7 +57,7 @@ export default {
       const API_URL = commonPath + `user/login`;
       axios({
         url: API_URL,
-        method: "GET",
+        method: "POST",
         data: login,
       })
         .then((res) => {
