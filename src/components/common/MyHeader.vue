@@ -15,7 +15,9 @@
 
       <v-spacer></v-spacer>
       <div v-if="getUser">
-        <a href="#" id="nav_a">{{ getNickName }}님 안녕하세요</a>
+        <router-link :to="{ name: 'detail' }" id="nav_a">
+          {{ getNickName }}님 안녕하세요
+        </router-link>
         <a href="#" @click="logout" id="nav_a">로그아웃</a>
       </div>
       <div v-else>

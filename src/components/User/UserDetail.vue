@@ -1,7 +1,15 @@
-<template></template>
+<template>
+  <CalendarHeatmap></CalendarHeatmap>
+</template>
 
 <script>
-export default {};
+import { CalendarHeatmap } from "vue-calendar-heatmap";
+
+export default {
+  components: {
+    CalendarHeatmap,
+  },
+};
 </script>
 
 <style></style>
