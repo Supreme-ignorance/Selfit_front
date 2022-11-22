@@ -32,6 +32,7 @@
                 </div>
               </v-row>
             </v-card-text>
+
             <v-card color="#385F73" dark>
               <v-card-title class="text-h5">
                 Level {{ getUserInfo.level }}
