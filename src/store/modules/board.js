@@ -32,6 +32,27 @@ export default {
     },
   },
   actions: {
+    setArticle({ commit }, article) {
+      return new Promise((response, reject) => {
+        let API_URL = commonPath + "article/write";
+        axios({
+          url: API_URL,
+          method: "POST",
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
+          data: article,
+        })
+          .then((res) => {
+            commit;
+            response(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
+    },
     callBoardsPromise({ commit }) {
       return new Promise((response, reject) => {
         // 비동기 작업
@@ -39,6 +60,9 @@ export default {
         axios({
           url: API_URL,
           method: "GET",
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
         })
           .then((res) => {
             console.log("boardList setting...");
@@ -59,6 +83,9 @@ export default {
           url: API_URL,
           method: "GET",
           params: {},
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
         })
           .then((res) => {
             console.log("articleList setting...");
@@ -77,6 +104,9 @@ export default {
         url: API_URL,
         method: "GET",
         params: {},
+        headers: {
+          "access-token": sessionStorage.getItem("access-token"),
+        },
       })
         .then((res) => {
           console.log("article setting...");

@@ -6,7 +6,10 @@ const commonPath = "http://localhost:9999/api/";
 export default {
   namespaced: false,
   state: {
-    loginUser: sessionStorage.getItem("currentLogin_id"),
+    loginUser: {
+      id: sessionStorage.getItem("currentLogin_id"),
+      nickname: sessionStorage.getItem("currentLogin_nickname"),
+    },
     boards: [],
     daily: [],
     userInfo: null,
@@ -20,7 +23,7 @@ export default {
     },
     getUserInfo(state) {
       return state.userInfo;
-    }
+    },
   },
   mutations: {
     SET_DAILY(state, daily) {
@@ -35,7 +38,7 @@ export default {
     },
     SET_USER_INFO(state, userInfo) {
       state.userInfo = userInfo;
-    }
+    },
   },
   actions: {
     setDaily({ commit }, id) {
@@ -57,7 +60,7 @@ export default {
           });
       });
     },
-    setUserInfo({commit}, id) {
+    getUserInfo({ commit }, id) {
       const API_URL = commonPath + "user/" + id;
       axios({
         url: API_URL,
@@ -123,7 +126,10 @@ export default {
               "currentLogin_gender",
               res.data["loginUser"].gender
             );
-            commit("SET_LOGIN_USER", res.data["loginUser"].id);
+            commit("SET_LOGIN_USER", {
+              id: res.data["loginUser"].id,
+              nickname: res.data["loginUser"].nickname,
+            });
             router.push("/");
           } else {
             alert("로그인 실패!");
