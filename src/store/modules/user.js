@@ -60,7 +60,7 @@ export default {
           });
       });
     },
-    getUserInfo({ commit }, id) {
+    setUserInfo({ commit }, id) {
       const API_URL = commonPath + "user/" + id;
       axios({
         url: API_URL,
