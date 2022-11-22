@@ -3,24 +3,24 @@
     <v-container>
       <v-layout justify-center style="width: 90%">
         <v-row>
-          <div v-for="video in getVideos" :key="video.videoId">
+          <div v-for="likedVideo in getLikedVideos" :key="likedVideo.videoId">
             <v-card
-              @click="goUrl(video.videoId)"
+              @click="goUrl(likedVideo.videoId)"
               class="mx-auto my-12"
               max-width="374"
             >
               <v-img
                 height="250"
-                :src="`https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`"
+                :src="`https://img.youtube.com/vi/${likedVideo.videoId}/hqdefault.jpg`"
               ></v-img>
-              <v-card-title>{{ video.title }}</v-card-title>
+              <v-card-title>{{ likedVideo.title }}</v-card-title>
               <v-divider class="mx-4"></v-divider>
               <v-card-text>
                 <v-row align="center" class="my-2 mx-2">
-                  <div class="text-subtitle-1">{{ video.channelName }}</div>
+                  <div class="text-subtitle-1">{{ likedVideo.channelName }}</div>
                   <v-spacer></v-spacer>
                   <div class="text-subtitle-1">
-                    👀 {{ video.viewCnt }} | 💜 {{ video.likeCnt }}
+                    👀 {{ likedVideo.viewCnt }} | 💜 {{ likedVideo.likeCnt }}
                   </div>
                 </v-row>
               </v-card-text>
