@@ -18,6 +18,7 @@
       </div>
         <v-row dense>
           <v-col cols="12">
+
             <v-card-text>
               <v-row align="center" class="mx-2">
                 <div>채널 : {{ getUserInfo.exp }}</div>
@@ -28,7 +29,9 @@
                 </div>
               </v-row>
             </v-card-text>
+
             <v-card color="#385F73" dark>
+
               <v-card-title class="text-h5"> Level {{getUserInfo.level}} 
                 <v-spacer></v-spacer>
                 레벨업까지 {{ getUserInfo.exp }} exp
@@ -42,6 +45,8 @@
                 ></v-progress-linear>
               </v-container>
             </v-card>
+
+            
           </v-col>
         </v-row>
 
