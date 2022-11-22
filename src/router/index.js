@@ -85,13 +85,13 @@ const routes = [
         ],
       },
       {
-        path: "write",
+        path: ":boardSeq/write",
         name: "ArticleWrite",
         component: ArticleForm,
       },
       {
         path: "modify",
-        name: "ArticleModify",
+        name: "ArticleModify/:articleId",
         component: ArticleModify,
       },
     ],

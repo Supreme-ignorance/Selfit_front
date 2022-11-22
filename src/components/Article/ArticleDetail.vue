@@ -60,9 +60,9 @@ export default {
   },
   computed: {
     ...mapState(["articles"]),
-    ...mapGetters(["getArticleId", "getArticle", "getContentWidth"]),
-    id() {
-      return this.getArticleId(this.$route.params.idx);
+    ...mapGetters(["getArticle", "getContentWidth"]),
+    path() {
+      return this.$route.fullPath;
     },
   },
   methods: {
@@ -90,7 +90,7 @@ export default {
       });
   },
   watch: {
-    id: function () {
+    path: function () {
       this.$store
         .dispatch("callBoardsPromise")
         .then(() => {

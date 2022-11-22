@@ -2,17 +2,17 @@
   <div>
     <router-view />
     <v-divider></v-divider>
-    <div class="mt-3 d-flex flex-row-reverse">
-      <v-btn
-        color="blue lighten-4"
-        elevation="2"
-        class="mr-4"
-        @click="goUrl('ArticleWrite')"
-      >
-        글 쓰기
-      </v-btn>
-    </div>
     <v-container>
+      <div class="mt-3 d-flex flex-row-reverse">
+        <v-btn
+          color="deep-purple lighten-2"
+          text
+          class="mr-5"
+          @click="goUrl('ArticleWrite')"
+        >
+          글 쓰기
+        </v-btn>
+      </div>
       <v-layout justify-center>
         <v-simple-table style="width: 90%">
           <thead>
@@ -28,7 +28,7 @@
               v-for="(article, index) in getArticles"
               :key="article.articleId"
             >
-              <td>{{ index + 1 }}</td>
+              <td>{{ getArticles.length - index }}</td>
               <td>
                 <router-link
                   :to="{

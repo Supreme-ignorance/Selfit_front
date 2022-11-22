@@ -15,8 +15,11 @@
 
       <v-spacer></v-spacer>
       <div v-if="getUser">
-        <router-link :to="{ name: 'detail', params: { id: getId } }" id="nav_a">
-          {{ getNickName }}님 안녕하세요
+        <router-link
+          :to="{ name: 'detail', params: { id: getLoginUser.id } }"
+          id="nav_a"
+        >
+          {{ getLoginUser.nickname }}님 안녕하세요
         </router-link>
         <a href="#" @click="logout" id="nav_a">로그아웃</a>
       </div>
@@ -43,7 +46,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item v-if="getNickName">
+          <v-list-item v-if="getLoginUser">
             <v-list-item-content @click="goUrl('/video/likedlist')">
               <v-list-item-title class="text-h6"> 좋아요 </v-list-item-title>
               <v-list-item-subtitle> 우리 모두 좋아요 </v-list-item-subtitle>
@@ -100,12 +103,6 @@ export default {
       } else {
         return false;
       }
-    },
-    getNickName() {
-      return sessionStorage.getItem("currentLogin_nickname");
-    },
-    getId() {
-      return sessionStorage.getItem("currentLogin_id");
     },
   },
 

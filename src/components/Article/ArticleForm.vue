@@ -1,30 +1,85 @@
 <template>
   <div>
-    <v-app>
-    <v-main>
-      <v-container >
-        <v-layout justify-center>
-          <v-card>
-            <v-form>
-              <v-text-field v-model="title" dense outlined label="title" style="width: 80%; margin-left: 100px; padding-top: 50px; margin-right: 100px"
-                ></v-text-field>
-              <v-textarea v-model="content" label="content" outlined rows="13" style="width: 80%; margin-left: 100px; margin-right: 100px">
-              </v-textarea>
-              <v-btn width="100px" style="margin-left: 600px; margin-bottom:30px;" >취소</v-btn>
-              <v-btn width="100px" style="margin-left: 30px; margin-bottom:30px; margin-right: 100px" type="submit">제출</v-btn>
-            </v-form>
-          </v-card>
-          <v-col cols="12" md="1"/>
-        </v-layout>
-      </v-container>
-    </v-main>
-  </v-app>
+    <v-card
+      class="mx-auto my-12 align-start flex-column"
+      :max-width="getContentWidth"
+      tile
+      outlined
+    >
+      <v-text-field
+        label="title"
+        :rules="rules"
+        hide-details="auto"
+        v-model="article.title"
+        class="mx-5"
+      ></v-text-field>
+
+      <v-divider class="mx-4"></v-divider>
+
+      <v-card-text class="black--text">
+        <v-textarea
+          outlined
+          name="input-6-8"
+          label="content"
+          v-model="article.content"
+          height="600"
+          hide-details
+        ></v-textarea>
+      </v-card-text>
+
+      <v-divider class="mx-4"></v-divider>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="deep-purple lighten-2" text @click="setArticle()">
+          작성
+        </v-btn>
+        <v-btn color="deep-purple lighten-2" text @click="goBack()">
+          취소
+        </v-btn>
+      </v-card-actions>
+
+      <v-divider class="mx-4"></v-divider>
+
+      <router-view />
+    </v-card>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "ArticleForm",
+  data() {
+    return {
+      rules: [
+        (value) => !!value || "Required.",
+        (value) => (value && value.length >= 3) || "Min 3 characters",
+      ],
+      article: {
+        title: "",
+        content: "",
+      },
+    };
+  },
+  computed: {
+    ...mapGetters(["getContentWidth"]),
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
+    setArticle() {
+      let article = {
+        boardSeq: this.$route.params.boardSeq,
+        writerId: sessionStorage.getItem("currentLogin_id"),
+        title: this.article.title,
+        content: this.article.content,
+      };
+      this.$store.dispatch("setArticle", article);
+      this.goBack();
+    },
+  },
 };
 </script>
 

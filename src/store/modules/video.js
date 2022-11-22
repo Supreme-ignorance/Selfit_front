@@ -38,6 +38,9 @@ export default {
         axios({
           url: API_URL,
           method: "POST",
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
           params: {
             id: payload.id,
             videoId: payload.videoId,
@@ -73,6 +76,9 @@ export default {
       axios({
         url: API_URL,
         method: "GET",
+        headers: {
+          "access-token": sessionStorage.getItem("access-token"),
+        },
       })
         .then((res) => {
           commit("SET_VIDEO", res.data);
