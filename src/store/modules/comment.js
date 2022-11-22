@@ -46,7 +46,6 @@ export default {
         method: "GET",
       })
         .then((res) => {
-          console.log("comments setting...");
           commit("CALL_COMMENTS", res.data);
         })
         .catch((err) => {

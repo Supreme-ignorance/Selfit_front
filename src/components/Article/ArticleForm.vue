@@ -31,7 +31,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="deep-purple lighten-2" text @click="setArticle()">
+        <v-btn color="deep-purple lighten-2" text @click="writeArticle()">
           작성
         </v-btn>
         <v-btn color="deep-purple lighten-2" text @click="goBack()">
@@ -69,14 +69,14 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
-    setArticle() {
+    writeArticle() {
       let article = {
         boardSeq: this.$route.params.boardSeq,
         writerId: sessionStorage.getItem("currentLogin_id"),
         title: this.article.title,
         content: this.article.content,
       };
-      this.$store.dispatch("setArticle", article);
+      this.$store.dispatch("writeArticle", article);
       this.goBack();
     },
   },

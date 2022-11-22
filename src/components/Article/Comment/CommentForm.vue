@@ -36,7 +36,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      content: "입력하세요",
+      content: "",
     };
   },
   methods: {
