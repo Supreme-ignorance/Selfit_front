@@ -8,13 +8,20 @@ export default {
   state: {
     loginUser: sessionStorage.getItem("currentLogin_id"),
     boards: [],
+    daily: [],
   },
   getters: {
     getLoginUser(state) {
       return state.loginUser;
     },
+    getDaily(state) {
+      return state.daily;
+    },
   },
   mutations: {
+    SET_DAILY(state, daily) {
+      state.daily = daily;
+    },
     LOGOUT(state) {
       sessionStorage.clear();
       state.loginUser = null;
@@ -24,6 +31,25 @@ export default {
     },
   },
   actions: {
+    setDaily({ commit }, id) {
+      return new Promise((response, reject) => {
+        id;
+        const API_URL = commonPath + "daily/" + id;
+        axios({
+          url: API_URL,
+          method: "GET",
+        })
+          .then((res) => {
+            console.log("daily setting...");
+            commit("SET_DAILY", res.data);
+            response(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
+    },
     logout({ commit }) {
       commit("LOGOUT");
     },

@@ -18,7 +18,7 @@ export default {
     },
     getLikedVideos(state) {
       return state.likedVideos;
-    }
+    },
   },
   mutations: {
     SET_VIDEO_LIST(state, videos) {
@@ -29,7 +29,7 @@ export default {
     },
     GET_LIKEDVIDEO_LIST(state, likedVideos) {
       state.likedVideos = likedVideos;
-    }
+    },
   },
   actions: {
     async setVideoList({ commit }) {
