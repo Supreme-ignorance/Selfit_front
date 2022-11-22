@@ -30,7 +30,9 @@
               <v-card-title class="text-h5"> Unlimited music now </v-card-title>
 
               <v-container>
-                <CalendarHeatmap :end-date="Date.now()" :values="getDaily"
+                <CalendarHeatmap :end-date="Date.now()" 
+                :range-color="['ebedf0', 'dae2ef', '#c0ddf9', '#73b3f3', '#3886e1', '#17459e']"
+                :values="getDaily"
               /></v-container>
 
               <v-card-subtitle
