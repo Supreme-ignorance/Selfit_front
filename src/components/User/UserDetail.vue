@@ -31,7 +31,9 @@
             </v-card-text>
 
             <v-card color="#385F73" dark>
+              <v-row align="center" class="mx-2">
 
+              </v-row>
               <v-card-title class="text-h5"> Level {{getUserInfo.level}} 
                 <v-spacer></v-spacer>
                 레벨업까지 {{ getUserInfo.exp }} exp
@@ -46,7 +48,7 @@
               </v-container>
             </v-card>
 
-            
+
           </v-col>
         </v-row>
 
