@@ -6,14 +6,22 @@
       tile
       outlined
     >
-    <v-row align="center" class="my-2 mx-2">
-      <v-card-title class="mt-3">
-        {{ getVideo.title }} &nbsp; | &nbsp; {{ getVideo.videoType }}</v-card-title
-      >
-      <v-spacer></v-spacer>
-      <div class="mx-10">💗 좋아요</div>
-    </v-row>
-      
+      <v-row align="center" class="my-2 mx-2">
+        <v-card-title>
+          {{ getVideo.title }} &nbsp; | &nbsp;
+          {{ getVideo.videoType }}</v-card-title
+        >
+        <v-spacer></v-spacer>
+        <v-btn
+          color="deep-purple lighten-2"
+          text
+          icon
+          class="mx-10"
+          @click="like(getVideo.videoId)"
+        >
+          <v-icon>mdi-thumb-up</v-icon>
+        </v-btn>
+      </v-row>
       <v-divider class="mx-4 my-3"></v-divider>
       <div>
         <v-col align="center" class="mx-0">
@@ -31,14 +39,16 @@
       </div>
 
       <v-divider class="mx-4"></v-divider>
-      
+
       <v-card-text>
         <v-row align="center" class="my-2 mx-2">
-          <div class="grey--text"> 채널 : {{ getVideo.channelName }}</div>
+          <div class="grey--text">채널 : {{ getVideo.channelName }}</div>
           <v-spacer></v-spacer>
-          <div class="grey--text">조회수 : {{ getVideo.viewCnt }} &nbsp; | &nbsp; 좋아요 : {{getVideo.likeCnt}}</div>
+          <div class="grey--text">
+            조회수 : {{ getVideo.viewCnt }} &nbsp; | &nbsp; 좋아요 :
+            {{ getVideo.likeCnt }}
+          </div>
         </v-row>
-
       </v-card-text>
 
       <router-view />
@@ -52,6 +62,15 @@ export default {
   name: "video-Detail",
   computed: {
     ...mapGetters(["getVideo", "getContentWidth"]),
+  },
+  methods: {
+    like(videoId) {
+      let payload = {
+        id: sessionStorage.getItem("currentLogin_id"),
+        videoId: videoId,
+      };
+      this.$store.dispatch("setLikedVideo", payload);
+    },
   },
   created() {
     this.$store.dispatch("setVideo", this.$route.params.videoId);

@@ -6,8 +6,9 @@
           <div v-for="likedVideo in getLikedVideos" :key="likedVideo.videoId">
             <v-card
               @click="goUrl(likedVideo.videoId)"
-              class="mx-auto my-12"
+              class="mx-3 my-12"
               max-width="374"
+              min-height="430"
             >
               <v-img
                 height="250"
@@ -17,7 +18,9 @@
               <v-divider class="mx-4"></v-divider>
               <v-card-text>
                 <v-row align="center" class="my-2 mx-2">
-                  <div class="text-subtitle-1">{{ likedVideo.channelName }}</div>
+                  <div class="text-subtitle-1">
+                    {{ likedVideo.channelName }}
+                  </div>
                   <v-spacer></v-spacer>
                   <div class="text-subtitle-1">
                     👀 {{ likedVideo.viewCnt }} | 💜 {{ likedVideo.likeCnt }}
