@@ -33,7 +33,7 @@ export default {
     SET_LOGIN_USER(state, id) {
       state.loginUser = id;
     },
-    GET_USER_INFO(state, userInfo) {
+    SET_USER_INFO(state, userInfo) {
       state.userInfo = userInfo;
     }
   },
@@ -64,7 +64,8 @@ export default {
         method: "GET",
       })
         .then((res) => {
-          commit("GET_INFO", res.data);
+          console.log("info setting...");
+          commit("SET_USER_INFO", res.data);
         })
         .catch((err) => {
           console.log(err);

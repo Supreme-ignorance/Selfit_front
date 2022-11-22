@@ -1,44 +1,43 @@
 <template>
   <div>
-    
-
     <v-banner id="banner" class="pa-0" dark>
       <v-img src="@/assets/jogging_road_cut.jpg" height="300"></v-img>
     </v-banner>
-    <div>
-      <v-card
-      class="mx-auto my-12 align-center flex-column"
-      :max-width="getContentWidth">
-      
-    </v-card>
-    
-  </div>
-  
-  <v-card
-  class="mx-auto my-12 align-center flex-column"
-  :max-width="getContentWidth"
-  tile
-  outlined
-  >
-    <v-img src="@/assets/profile.png" width="100" class="mx-10 my-10"></v-img>
-    <div>
+    <v-card
+    class="mx-auto my-12 align-center flex-column"
+    :max-width="getContentWidth"
+    tile
+    outlined
+    >
+    <v-container>
+      <v-img src="@/assets/profile.png" width="100" class="mx-10 my-10"></v-img>
       <div v-if="getUserInfo">
-        <div>
+        <h3 class="mx-10 my-10">
           {{getUserInfo.nickname}}
-        </div>
+        </h3>
       </div>
-    </div>
-      <v-container>
         <v-row dense>
           <v-col cols="12">
+            <v-card-text>
+              <v-row align="center" class="mx-2">
+                <div>채널 : {{ getUserInfo.exp }}</div>
+                <v-spacer></v-spacer>
+                <div>
+                  좋아요 :
+                  {{ getUserInfo.exp }}
+                </div>
+              </v-row>
+            </v-card-text>
             <v-card color="#385F73" dark>
-              <v-card-title class="text-h5"> Level {{getUserInfo}} </v-card-title>
-
+              <v-card-title class="text-h5"> Level {{getUserInfo.level}} 
+                <v-spacer></v-spacer>
+                레벨업까지 {{ getUserInfo.exp }} exp
+              </v-card-title>
               <v-container>
                 <v-progress-linear
                   color="light-blue"
                   height="20"
-                  value="10"
+                  :value="getUserInfo.exp / getUserInfo.level"
                   striped
                 ></v-progress-linear>
               </v-container>
@@ -49,7 +48,7 @@
         <v-row dense>
           <v-col cols="12">
             <v-card>
-              <v-card-title class="text-h5">  운동 기록 </v-card-title>
+              <v-card-title class="text-h5"> 데일리 운동 기록 </v-card-title>
 
               <v-container>
                 <CalendarHeatmap :end-date="Date.now()" 
@@ -58,8 +57,7 @@
               /></v-container>
 
               <v-card-subtitle
-                >Listen to your favorite artists and albums whenever and
-                wherever, online and offline.</v-card-subtitle
+                ></v-card-subtitle
               >
             </v-card>
           </v-col>
@@ -80,14 +78,15 @@ export default {
   },
   computed: {
     ...mapGetters(["getDaily", "getContentWidth", "getUserInfo"]),
+    callUser() {
+      return this.$route.params.id;
+    }
   },
   created() {
-    let id = sessionStorage.getItem("currentLogin_id");
-    console.log(id);
-    if (id == null) this.$router.go(-1);
-    this.$store.dispatch("setDaily", "ssafy");
-    this.$store.dispatch("setVideo", "ssafy");
+    this.$store.dispatch("setDaily", this.callUser);
+    this.$store.dispatch("setUserInfo", this.callUser)
   },
+  
   
 };
 </script>
