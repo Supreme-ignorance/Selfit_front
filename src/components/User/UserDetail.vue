@@ -56,6 +56,26 @@
                 </v-row>
               </v-card-text>
             </v-col>
+            <!-- v-if="팔로우 되어 있으면/팔로우 안 되어 있으면" -->
+            <div >
+              <v-btn
+              depressed
+              color="grey lighten-4"
+              class="mt-5 mx-3"
+              @click="follow()"
+              >
+                <v-icon color="grey lighten-2">mdi-heart</v-icon>
+                팔로우
+              </v-btn>
+              <v-btn
+              color="pink lighten-5"
+              class="mt-5 mx-3"
+              @click="unfollow()"
+              >
+                <v-icon color="pink">mdi-heart</v-icon>
+                팔로우 취소
+              </v-btn>
+            </div>
           </v-row>
         </v-layout>
 
