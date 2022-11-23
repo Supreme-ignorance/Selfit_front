@@ -33,6 +33,12 @@
 
     <v-navigation-drawer v-model="drawer" absolute bottom temporary>
       <v-list nav>
+        <v-list-item>
+          <dailyRegist></dailyRegist>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
         <v-list-item-group
           v-model="group"
           active-class="deep-purple--text text--accent-3"
@@ -46,7 +52,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item v-if="getLoginUser">
+          <v-list-item v-if="getLoginUser.id">
             <v-list-item-content @click="goUrl('/video/likedlist')">
               <v-list-item-title class="text-h6"> 좋아요 </v-list-item-title>
               <v-list-item-subtitle> 우리 모두 좋아요 </v-list-item-subtitle>
@@ -74,6 +80,8 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import dailyRegist from "@/components/User/UserDailyRegist.vue";
+
 export default {
   name: "MyHeader",
   data() {
@@ -81,6 +89,9 @@ export default {
       drawer: false,
       group: null,
     };
+  },
+  components: {
+    dailyRegist,
   },
   methods: {
     logout() {

@@ -83,7 +83,6 @@ export default {
   created() {
     this.$store.dispatch("callArticlesPromise", this.$route.params.boardSeq);
   },
-  watch: {},
   methods: {
     ArticleWrite() {
       if (this.getLoginUser.id) {

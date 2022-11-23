@@ -44,9 +44,26 @@ export default {
     },
   },
   actions: {
+    inputTime({ commit }, daily) {
+      return new Promise((response, reject) => {
+        const API_URL = commonPath + "daily/write";
+        axios({
+          url: API_URL,
+          method: "POST",
+          data: daily,
+        })
+          .then((res) => {
+            commit;
+            response(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
+    },
     setDaily({ commit }, id) {
       return new Promise((response, reject) => {
-        id;
         const API_URL = commonPath + "daily/" + id;
         axios({
           url: API_URL,
@@ -133,7 +150,7 @@ export default {
               id: res.data["loginUser"].id,
               nickname: res.data["loginUser"].nickname,
             });
-            router.push("/");
+            router.go(-1);
           } else {
             alert("로그인 실패!");
           }

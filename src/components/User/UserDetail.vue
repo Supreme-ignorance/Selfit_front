@@ -66,9 +66,6 @@
           </v-col>
         </v-row>
 
-        
-
-
         <v-row dense>
           <v-col cols="12">
             <v-card>
