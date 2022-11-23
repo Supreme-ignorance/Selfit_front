@@ -1,3 +1,4 @@
+import router from "@/router";
 import axios from "axios";
 
 const commonPath = "http://localhost:9999/api/";
@@ -45,6 +46,12 @@ export default {
           .then((res) => {
             commit;
             response(res.data);
+            router.push({
+              name: "CommentList",
+              params: {
+                id: articleId,
+              },
+            });
           })
           .catch((err) => {
             console.log(err);

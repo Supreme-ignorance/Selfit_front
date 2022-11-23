@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <myHeader :key="getLoginUser"></myHeader>
+    <myHeader :key="isNull"></myHeader>
     <router-view />
   </v-app>
 </template>
@@ -16,6 +16,10 @@ export default {
   },
   computed: {
     ...mapGetters(["getLoginUser"]),
+    isNull() {
+      let chk = this.getLoginUser;
+      return chk === undefined || chk === null ? true : false;
+    },
   },
 };
 </script>
