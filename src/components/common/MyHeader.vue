@@ -33,7 +33,7 @@
 
     <v-navigation-drawer v-model="drawer" absolute bottom temporary width="420">
       <v-list nav>
-        <v-list-item>
+        <v-list-item v-if="getLoginUser.id">
           <dailyRegist></dailyRegist>
         </v-list-item>
 
