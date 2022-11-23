@@ -55,7 +55,7 @@ export default {
           });
       });
     },
-    async setVideoList({ commit }) {
+    async setVideoList({ commit }, payload) {
       const API_URL = commonPath + `list`;
       try {
         const res = await axios({
@@ -63,6 +63,11 @@ export default {
           method: "GET",
           headers: {
             "access-token": sessionStorage.getItem("access-token"),
+          },
+          params: {
+            videoType: payload.videoType,
+            orderBy: payload.orderBy,
+            orderDir: payload.orderDir,
           },
         });
         console.log("videoList setting...");

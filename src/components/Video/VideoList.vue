@@ -3,28 +3,62 @@
     <v-container>
       <v-col cols="6">
         <v-row>
-          <v-img src="@/assets/all.png" width="7" class="mx-10 my-7"></v-img>
-          <v-img src="@/assets/house.png" width="7" class="mx-10 my-7"></v-img>
-          <v-img src="@/assets/sport.png" width="7" class="mx-10 my-7"></v-img>
-          <v-img src="@/assets/meditation.png" width="7" class="mx-10 my-7"></v-img>
-          <v-img src="@/assets/pilates.png" width="7" class="mx-10 my-7"></v-img>
+          <v-img
+            src="@/assets/all.png"
+            width="7"
+            class="mx-10 my-7"
+            @click="getVideoList('모두')"
+          ></v-img>
+          <v-img
+            src="@/assets/house.png"
+            width="7"
+            class="mx-10 my-7"
+            @click="getVideoList('홈트')"
+          ></v-img>
+          <v-img
+            src="@/assets/sport.png"
+            width="7"
+            class="mx-10 my-7"
+            @click="getVideoList('피트니스')"
+          ></v-img>
+          <v-img
+            src="@/assets/meditation.png"
+            width="7"
+            class="mx-10 my-7"
+            @click="getVideoList('요가')"
+          ></v-img>
+          <v-img
+            src="@/assets/pilates.png"
+            width="7"
+            class="mx-10 my-7"
+            @click="getVideoList('필라테스')"
+          ></v-img>
         </v-row>
       </v-col>
 
-
       <v-row align="center">
         <v-col class="d-flex" cols="12" sm="4">
-          <v-select :items="items" label="정렬 기준">
+          <v-select :items="orderBys" label="정렬 기준" v-model="orderBy">
           </v-select>
-          <v-select class="mx-2" :items="items" label="정렬 순서">
+          <v-select
+            class="mx-2"
+            :items="orderDirs"
+            label="정렬 방향"
+            v-model="orderDir"
+          >
           </v-select>
         </v-col>
+        <v-btn
+          color="deep-purple lighten-2"
+          text
+          class="mr-5"
+          @click="getVideoList()"
+        >
+          정렬
+        </v-btn>
       </v-row>
       <v-layout justify-center style="width: 90%">
         <v-row>
-          
-
-
           <div v-for="video in getVideos" :key="video.videoId">
             <v-card
               @click="goUrl(video.videoId)"
@@ -59,15 +93,42 @@
 import { mapGetters } from "vuex";
 export default {
   name: "video-List",
+  data() {
+    return {
+      orderBy: null,
+      orderDir: null,
+      orderBys: [
+        "video_id",
+        "video_title",
+        "channel_name",
+        "view_cnt",
+        "like_cnt",
+      ],
+      orderDirs: ["ASC", "DESC"],
+    };
+  },
   computed: {
     ...mapGetters(["getVideos"]),
   },
   created() {
-    this.$store.dispatch("setVideoList");
+    let payload = {
+      videoType: null,
+      orderBy: null,
+      orderDir: null,
+    };
+    this.$store.dispatch("setVideoList", payload);
   },
   methods: {
     goUrl(videoId) {
       this.$router.push(`/video/${videoId}`).catch(() => {});
+    },
+    getVideoList(type) {
+      let payload = {
+        videoType: type,
+        orderBy: this.orderBy,
+        orderDir: this.orderDir,
+      };
+      this.$store.dispatch("setVideoList", payload);
     },
   },
 };
