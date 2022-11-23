@@ -1,6 +1,18 @@
 <template>
   <div>
     <v-container>
+      <v-col cols="6">
+        <v-row>
+          <v-img src="@/assets/all.png" width="7" class="mx-10 my-7"></v-img>
+          <v-img src="@/assets/house.png" width="7" class="mx-10 my-7"></v-img>
+          <v-img src="@/assets/sport.png" width="7" class="mx-10 my-7"></v-img>
+          <v-img src="@/assets/meditation.png" width="7" class="mx-10 my-7"></v-img>
+          <v-img src="@/assets/pilates.png" width="7" class="mx-10 my-7"></v-img>
+          
+        </v-row>
+      </v-col>
+
+
       <v-row align="center">
         <v-col class="d-flex" cols="12" sm="4">
           <v-select :items="items" label="정렬 기준">
