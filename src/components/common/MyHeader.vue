@@ -31,7 +31,7 @@
       </div>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute bottom temporary>
+    <v-navigation-drawer v-model="drawer" absolute bottom temporary width="420">
       <v-list nav>
         <v-list-item>
           <dailyRegist></dailyRegist>
