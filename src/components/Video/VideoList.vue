@@ -1,70 +1,86 @@
 <template>
-  <div>
+  <v-card
+    class="mx-auto my-12 align-start flex-column"
+    :max-width="getContentWidth * 1.5"
+    tile
+    outlined
+  >
     <v-container>
-      <v-col cols="6">
-        <v-row>
+      <v-layout class="grey lighten-5">
+        <v-row justify="space-around">
           <v-img
             src="@/assets/all.png"
-            width="7"
+            max-width="150"
+            max-height="150"
             class="mx-10 my-7"
             @click="getVideoList('모두')"
           ></v-img>
           <v-img
             src="@/assets/house.png"
-            width="7"
+            max-width="150"
+            max-height="150"
             class="mx-10 my-7"
             @click="getVideoList('홈트')"
           ></v-img>
           <v-img
             src="@/assets/sport.png"
-            width="7"
+            max-width="150"
+            max-height="150"
             class="mx-10 my-7"
             @click="getVideoList('피트니스')"
           ></v-img>
           <v-img
             src="@/assets/meditation.png"
-            width="7"
+            max-width="150"
+            max-height="150"
             class="mx-10 my-7"
             @click="getVideoList('요가')"
           ></v-img>
           <v-img
             src="@/assets/pilates.png"
-            width="7"
+            max-width="150"
+            max-height="150"
             class="mx-10 my-7"
             @click="getVideoList('필라테스')"
           ></v-img>
         </v-row>
-      </v-col>
+      </v-layout>
 
-      <v-row align="center">
-        <v-col class="d-flex" cols="12" sm="4">
-          <v-select :items="orderBys" label="정렬 기준" v-model="orderBy">
-          </v-select>
-          <v-select
-            class="mx-2"
-            :items="orderDirs"
-            label="정렬 방향"
-            v-model="orderDir"
+      <v-layout>
+        <v-row align="center" justify="space-around">
+          <v-spacer></v-spacer>
+          <v-col cols="2">
+            <v-select :items="orderBys" label="정렬 기준" v-model="orderBy">
+            </v-select>
+          </v-col>
+          <v-col cols="2">
+            <v-select
+              class="mx-2"
+              :items="orderDirs"
+              label="정렬 방향"
+              v-model="orderDir"
+            >
+            </v-select>
+          </v-col>
+          <v-btn
+            color="deep-purple lighten-2"
+            text
+            class="mr-5"
+            @click="getVideoList()"
           >
-          </v-select>
-        </v-col>
-        <v-btn
-          color="deep-purple lighten-2"
-          text
-          class="mr-5"
-          @click="getVideoList()"
-        >
-          정렬
-        </v-btn>
-      </v-row>
-      <v-layout justify-center style="width: 90%">
-        <v-row>
+            정렬
+          </v-btn>
+        </v-row>
+      </v-layout>
+
+      <v-layout>
+        <v-row justify="space-around">
           <div v-for="video in getVideos" :key="video.videoId">
             <v-card
               @click="goUrl(video.videoId)"
               class="mx-3 my-12"
               max-width="374"
-              min-height="430"
+              min-height="500"
             >
               <v-img
                 height="250"
@@ -86,7 +102,7 @@
         </v-row>
       </v-layout>
     </v-container>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -108,7 +124,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getVideos"]),
+    ...mapGetters(["getVideos", "getContentWidth"]),
   },
   created() {
     let payload = {
