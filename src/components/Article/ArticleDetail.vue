@@ -41,7 +41,11 @@
         >
           글 수정
         </v-btn>
-        <v-btn color="deep-purple lighten-2" text @click="goUrl('CommentForm')">
+        <v-btn
+          color="deep-purple lighten-2"
+          text
+          @click="deleteArticle(getArticle.articleId)"
+        >
           글 삭제
         </v-btn>
       </v-card-actions>
@@ -72,6 +76,9 @@ export default {
       this.$router
         .push({ name: url, params: { articleId: articleId } })
         .catch(() => {});
+    },
+    deleteArticle(articleId) {
+      this.$store.dispatch("deleteArticle", articleId);
     },
   },
   created() {

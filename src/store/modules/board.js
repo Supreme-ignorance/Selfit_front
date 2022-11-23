@@ -32,6 +32,26 @@ export default {
     },
   },
   actions: {
+    deleteArticle({ commit }, articleId) {
+      return new Promise((response, reject) => {
+        let API_URL = commonPath + "article/delete/" + articleId;
+        axios({
+          url: API_URL,
+          method: "DELETE",
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
+        })
+          .then((res) => {
+            commit;
+            response(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
+    },
     writeArticle({ commit }, article) {
       return new Promise((response, reject) => {
         let API_URL = commonPath + "article/write";
