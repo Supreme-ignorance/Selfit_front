@@ -12,16 +12,28 @@
           {{ getVideo.videoType }}</v-card-title
         >
         <v-spacer></v-spacer>
-        <v-btn
-          color="deep-purple lighten-2"
-          text
-          icon
-          class="mx-10"
-          v-if="getLoginUser.id"
-          @click="like(getVideo.videoId)"
-        >
-          <v-icon>mdi-thumb-up</v-icon>
-        </v-btn>
+        <div v-if="getLoginUser.id">
+          <v-btn
+            color="deep-purple lighten-2"
+            text
+            icon
+            class="mx-3"
+            v-if="isCheck"
+            @click="like(getVideo.videoId)"
+          >
+            <v-icon>mdi-thumb-up</v-icon>
+          </v-btn>
+          <v-btn
+            color="grey"
+            text
+            icon
+            class="mx-3"
+            v-else
+            @click="unlike(getVideo.videoId)"
+          >
+            <v-icon>mdi-thumb-up</v-icon>
+          </v-btn>
+        </div>
       </v-row>
       <v-divider class="mx-4 my-3"></v-divider>
       <div>
@@ -61,8 +73,18 @@
 import { mapGetters } from "vuex";
 export default {
   name: "video-Detail",
+  data() {
+    return {
+      isCheck: this.getIsLiked,
+    };
+  },
   computed: {
-    ...mapGetters(["getVideo", "getContentWidth", "getLoginUser"]),
+    ...mapGetters([
+      "getVideo",
+      "getContentWidth",
+      "getLoginUser",
+      "getIsLiked",
+    ]),
   },
   methods: {
     like(videoId) {
@@ -71,10 +93,27 @@ export default {
         videoId: videoId,
       };
       this.$store.dispatch("setLikedVideo", payload);
+      this.isCheck = !this.isCheck;
+    },
+    unlike(videoId) {
+      let payload = {
+        id: sessionStorage.getItem("currentLogin_id"),
+        videoId: videoId,
+      };
+      this.$store.dispatch("deleteLikedVideo", payload);
+      this.isCheck = !this.isCheck;
     },
   },
   created() {
-    this.$store.dispatch("setVideo", this.$route.params.videoId);
+    let payload = {
+      id: sessionStorage.getItem("currentLogin_id"),
+      videoId: this.$route.params.videoId,
+    };
+
+    this.$store.dispatch("setVideo", payload.videoId);
+    this.$store.dispatch("isLikedVideo", payload).then(() => {
+      this.isCheck = this.getIsLiked;
+    });
   },
 };
 </script>

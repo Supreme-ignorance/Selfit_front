@@ -8,8 +8,12 @@ export default {
     videos: [],
     likedVideos: [],
     video: null,
+    isLiked: null,
   },
   getters: {
+    getIsLiked(state) {
+      return state.isLiked;
+    },
     getVideos(state) {
       return state.videos;
     },
@@ -21,6 +25,9 @@ export default {
     },
   },
   mutations: {
+    IS_LIKED_VIDEO(state, chk) {
+      state.isLiked = chk;
+    },
     SET_VIDEO_LIST(state, videos) {
       state.videos = videos;
     },
@@ -32,6 +39,52 @@ export default {
     },
   },
   actions: {
+    isLikedVideo({ commit }, payload) {
+      return new Promise((res, rej) => {
+        const API_URL = commonPath + `checklist`;
+        axios({
+          url: API_URL,
+          method: "GET",
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
+          params: {
+            id: payload.id,
+            videoId: payload.videoId,
+          },
+        })
+          .then((response) => {
+            commit("IS_LIKED_VIDEO", response.data);
+            res(response.data);
+          })
+          .catch((err) => {
+            rej(err);
+          });
+      });
+    },
+    deleteLikedVideo({ commit }, payload) {
+      return new Promise((res, rej) => {
+        const API_URL = commonPath + `unlike`;
+        axios({
+          url: API_URL,
+          method: "DELETE",
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
+          params: {
+            id: payload.id,
+            videoId: payload.videoId,
+          },
+        })
+          .then((response) => {
+            commit;
+            res(response.data);
+          })
+          .catch((err) => {
+            rej(err);
+          });
+      });
+    },
     setLikedVideo({ commit }, payload) {
       return new Promise((res, rej) => {
         const API_URL = commonPath + `like`;
