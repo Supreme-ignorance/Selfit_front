@@ -2,9 +2,10 @@
   <div>
     <router-view :key="$route.fullPath" />
     <v-container id="outer">
+      <v-divider></v-divider>
       <v-row align="center">
         <v-spacer></v-spacer>
-        <div class="mt-3 d-flex flex-row-reverse">
+        <div class="my-7 d-flex flex-row-reverse">
           <v-btn
             color="deep-purple lighten-2"
             text
@@ -17,7 +18,7 @@
       </v-row>
       <v-divider></v-divider>
       <v-container>
-        <v-layout justify-center>
+        <v-layout justify-center class="my-10">
           <v-data-table
             :headers="headers"
             :items="getArticles"
@@ -65,14 +66,16 @@ export default {
           align: "start",
           sortable: false,
           value: "sn",
+          width: 100,
         },
         {
           text: "제목",
           value: "title",
+          width: 500,
         },
-        { text: "작성자", value: "writerNickName" },
-        { text: "등록일", value: "regDate" },
-        { text: "조회수", value: "viewCnt" },
+        { text: "작성자", value: "writerNickName", width: 100 },
+        { text: "등록일", value: "regDate", width: 200 },
+        { text: "조회수", value: "viewCnt", width: 100 },
       ],
     };
   },
