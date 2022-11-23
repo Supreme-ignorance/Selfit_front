@@ -78,7 +78,6 @@ export default {
         content: this.article.content,
       };
       this.$store.dispatch("writeArticle", article);
-      this.goBack();
     },
   },
 };

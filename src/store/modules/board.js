@@ -47,10 +47,7 @@ export default {
             commit;
             response(res.data);
             router.push({
-              name: "CommentList",
-              params: {
-                id: articleId,
-              },
+              name: "ArticleList",
             });
           })
           .catch((err) => {
@@ -73,6 +70,9 @@ export default {
           .then((res) => {
             commit;
             response(res.data);
+            router.push({
+              name: "ArticleList",
+            });
           })
           .catch((err) => {
             console.log(err);

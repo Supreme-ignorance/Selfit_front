@@ -1,3 +1,4 @@
+import router from "@/router";
 import axios from "axios";
 
 const commonPath = "http://localhost:9999/api/comment/";
@@ -54,6 +55,7 @@ export default {
             console.log("comment delete...");
             commit;
             response(res.data);
+            router.go();
           })
           .catch((err) => {
             console.log(err);
