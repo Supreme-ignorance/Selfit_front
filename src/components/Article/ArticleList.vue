@@ -84,6 +84,9 @@ export default {
     Seq: function (newVal) {
       this.$store.dispatch("callArticlesPromise", newVal);
     },
+    getArticles: function () {
+      this.$store.dispatch("callArticlesPromise", this.Seq);
+    },
   },
   methods: {
     goUrl(url) {

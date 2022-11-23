@@ -15,7 +15,7 @@
           <div class="grey--text">{{ getArticle.writerNickName }}</div>
           <div class="grey--text">&nbsp;| {{ getArticle.regDate }}</div>
           <v-spacer></v-spacer>
-          <div class="grey--text">조회수 : {{ getArticle.viewCnt }}</div>
+          <div class="grey--text">조회수 : {{ getArticle.viewCnt + 1 }}</div>
         </v-row>
       </v-card-text>
 
@@ -34,19 +34,13 @@
           댓글 작성
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn
-          color="deep-purple lighten-2"
-          text
-          @click="goUrl('ArticleModify')"
-        >
-          수정
-        </v-btn>
-        <v-btn color="deep-purple lighten-2" text> 삭제 </v-btn>
+        <v-btn color="deep-purple lighten-2" text> 글 수정 </v-btn>
+        <v-btn color="deep-purple lighten-2" text> 글 삭제 </v-btn>
       </v-card-actions>
 
       <v-divider class="mx-4"></v-divider>
 
-      <router-view />
+      <router-view :key="$route.fullPath" />
     </v-card>
   </div>
 </template>
@@ -61,9 +55,6 @@ export default {
   computed: {
     ...mapState(["articles"]),
     ...mapGetters(["getArticle", "getContentWidth"]),
-    path() {
-      return this.$route.fullPath;
-    },
   },
   methods: {
     goUrl(url) {
@@ -88,24 +79,6 @@ export default {
           data[this.$route.params.idx - 1].articleId
         );
       });
-  },
-  watch: {
-    path: function () {
-      this.$store
-        .dispatch("callBoardsPromise")
-        .then(() => {
-          return this.$store.dispatch(
-            "callArticlesPromise",
-            this.$route.params.boardSeq
-          );
-        })
-        .then((data) => {
-          this.$store.dispatch(
-            "callArticle",
-            data[this.$route.params.idx - 1].articleId
-          );
-        });
-    },
   },
 };
 </script>

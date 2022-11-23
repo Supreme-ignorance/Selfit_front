@@ -32,7 +32,7 @@ export default {
     },
   },
   actions: {
-    setArticle({ commit }, article) {
+    writeArticle({ commit }, article) {
       return new Promise((response, reject) => {
         let API_URL = commonPath + "article/write";
         axios({
@@ -65,7 +65,6 @@ export default {
           },
         })
           .then((res) => {
-            console.log("boardList setting...");
             commit("CALL_BOARDS", res.data);
             response(res.data);
           })
@@ -88,7 +87,6 @@ export default {
           },
         })
           .then((res) => {
-            console.log("articleList setting...");
             commit("CALL_ARTICLES", res.data);
             response(res.data);
           })
