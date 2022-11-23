@@ -3,15 +3,6 @@
     <router-view :key="$route.fullPath" />
     <v-container id="outer">
       <v-row align="center">
-        <v-col class="d-flex" cols="12" sm="4">
-          <v-select class="mx-2" :items="bytItems" label="정렬 기준">
-          </v-select>
-          <v-select class="mx-2" :items="dirItems" label="정렬 순서">
-          </v-select>
-        </v-col>
-        <div class="mt-3 d-flex flex-row-reverse">
-          <v-btn color="deep-purple lighten-2" text class="mr-5"> 정렬 </v-btn>
-        </div>
         <v-spacer></v-spacer>
         <div class="mt-3 d-flex flex-row-reverse">
           <v-btn
@@ -27,38 +18,31 @@
       <v-divider></v-divider>
       <v-container>
         <v-layout justify-center>
-          <v-simple-table style="width: 90%">
-            <thead>
-              <tr>
-                <th>no.</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>조회수</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="(article, index) in getArticles"
-                :key="article.articleId"
+          <v-data-table
+            :headers="headers"
+            :items="getArticles"
+            single-expand
+            :expanded.sync="expanded"
+            item-key="articleId"
+            :items-per-page="5"
+            class="elevation-1"
+          >
+            <template v-slot:[`item.sn`]="{ index }">
+              {{ index + 1 }}
+            </template>
+            <template v-slot:[`item.title`]="{ item }">
+              <router-link
+                :to="{
+                  name: 'CommentList',
+                  params: {
+                    id: item.articleId,
+                  },
+                }"
               >
-                <td>{{ getArticles.length - index }}</td>
-                <td>
-                  <router-link
-                    :to="{
-                      name: 'CommentList',
-                      params: {
-                        idx: index + 1,
-                      },
-                    }"
-                  >
-                    {{ article.title }}
-                  </router-link>
-                </td>
-                <td>{{ article.writerNickName }}</td>
-                <td>{{ article.viewCnt }}</td>
-              </tr>
-            </tbody>
-          </v-simple-table>
+                {{ item.title }}
+              </router-link>
+            </template>
+          </v-data-table>
         </v-layout>
         <br />
         <div></div>
@@ -75,6 +59,21 @@ export default {
     return {
       bytItems: ["제목", "작성자", "등록일", "조회수"],
       dirItems: ["ASC", "DESC"],
+      headers: [
+        {
+          text: "번호",
+          align: "start",
+          sortable: false,
+          value: "sn",
+        },
+        {
+          text: "제목",
+          value: "title",
+        },
+        { text: "작성자", value: "writerNickName" },
+        { text: "등록일", value: "regDate" },
+        { text: "조회수", value: "viewCnt" },
+      ],
     };
   },
   computed: {

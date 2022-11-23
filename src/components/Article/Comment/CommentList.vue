@@ -36,11 +36,8 @@ export default {
           this.$route.params.boardSeq
         );
       })
-      .then((data) => {
-        this.$store.dispatch(
-          "callcomments",
-          data[this.$route.params.idx - 1].articleId
-        );
+      .then(() => {
+        this.$store.dispatch("callcomments", this.$route.params.id);
       });
   },
 };

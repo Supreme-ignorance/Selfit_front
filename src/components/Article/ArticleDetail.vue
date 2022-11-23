@@ -83,11 +83,8 @@ export default {
           this.$route.params.boardSeq
         );
       })
-      .then((data) => {
-        this.$store.dispatch(
-          "callArticle",
-          data[this.$route.params.idx - 1].articleId
-        );
+      .then(() => {
+        this.$store.dispatch("callArticle", this.$route.params.id);
       });
   },
 };
