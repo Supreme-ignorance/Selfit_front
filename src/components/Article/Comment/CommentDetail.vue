@@ -81,7 +81,6 @@ export default {
     },
     deleteComment() {
       this.$store.dispatch("deleteComment", this.comment.commentId);
-      this.$router.go();
     },
     updateComment() {
       let comment = this.comment;

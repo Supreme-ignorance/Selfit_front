@@ -90,7 +90,7 @@ const routes = [
         component: ArticleForm,
       },
       {
-        path: "modify/:articleId",
+        path: ":boardSeq/:articleId/modify",
         name: "ArticleModify",
         component: ArticleModify,
       },

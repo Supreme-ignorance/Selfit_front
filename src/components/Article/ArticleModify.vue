@@ -1,91 +1,82 @@
 <template>
   <div>
-    <h2>게시글 수정</h2>
+    <v-card
+      class="mx-auto my-12 align-start flex-column"
+      :max-width="getContentWidth * 0.7"
+      tile
+      outlined
+    >
+      <v-text-field
+        label="title"
+        :rules="rules"
+        hide-details="auto"
+        v-model="getArticle.title"
+        class="mx-5"
+      ></v-text-field>
 
-    <div>
-      <v-app>
-        <v-main>
-          <v-container>
-            <v-layout justify-center>
-              <v-card>
-                <v-form ref="form" @submit.prevent="onSubmitForm">
-                  <v-text-field
-                    v-model="title"
-                    dense
-                    outlined
-                    label="title"
-                    style="
-                      width: 80%;
-                      margin-left: 100px;
-                      padding-top: 50px;
-                      margin-right: 100px;
-                    "
-                  >
-                    {{ review.title }}
-                  </v-text-field>
-                  <v-textarea
-                    v-model="content"
-                    label="content"
-                    outlined
-                    rows="13"
-                    style="width: 80%; margin-left: 100px; margin-right: 100px"
-                  >
-                    {{ review.content }}
-                  </v-textarea>
-                  <v-btn
-                    width="100px"
-                    style="margin-left: 600px; margin-bottom: 30px"
-                    >취소</v-btn
-                  >
-                  <v-btn
-                    width="100px"
-                    style="
-                      margin-left: 30px;
-                      margin-bottom: 30px;
-                      margin-right: 100px;
-                    "
-                    type="submit"
-                    >제출</v-btn
-                  >
-                </v-form>
-              </v-card>
-              <v-col cols="12" md="1" />
-            </v-layout>
-          </v-container>
-        </v-main>
-      </v-app>
-    </div>
+      <v-divider class="mx-4"></v-divider>
 
-    <fieldset>
-      <legend>리뷰 수정하기</legend>
-      <label for="title">제목</label>
-      <input type="text" id="title" v-model="review.title" /> <br />
-      <label for="writer">글쓴이</label>
-      <input type="text" id="writer" v-model="review.writer" /> <br />
-      <label for="content">글내용</label>
-      <textarea v-model="review.content" cols="30" rows="10"></textarea>
-      <button @click="updateReview">수정</button>
-    </fieldset>
+      <v-card-text class="black--text">
+        <v-textarea
+          outlined
+          name="input-6-8"
+          label="content"
+          v-model="getArticle.content"
+          height="600"
+          hide-details
+        ></v-textarea>
+      </v-card-text>
+
+      <v-divider class="mx-4"></v-divider>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="deep-purple lighten-2" text @click="modifyArticle()">
+          수정
+        </v-btn>
+        <v-btn color="deep-purple lighten-2" text @click="goBack()">
+          취소
+        </v-btn>
+      </v-card-actions>
+
+      <v-divider class="mx-4"></v-divider>
+
+      <router-view />
+    </v-card>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 export default {
-  name: "ReviewModify",
+  name: "ArticleForm",
+  data() {
+    return {
+      rules: [
+        (value) => !!value || "Required.",
+        (value) => (value && value.length >= 3) || "Min 3 characters",
+      ],
+    };
+  },
   computed: {
-    ...mapState(["review"]),
+    ...mapGetters(["getContentWidth", "getArticle"]),
   },
   methods: {
-    updateReview() {
-      let updateReview = {
-        id: this.review.id,
-        title: this.review.title,
-        writer: this.review.writer,
-        content: this.review.content,
-      };
-      this.$store.dispatch("updateReview", updateReview);
+    modifyArticle() {
+      let article = this.getArticle;
+
+      this.$store.dispatch("modifyArticle", article);
+      this.$router.push({
+        name: "CommentList",
+        params: {
+          boardSeq: this.$route.params.boardSeq,
+          id: this.$route.params.articleId,
+        },
+      });
     },
+  },
+  created() {
+    this.$store.dispatch("callArticle", this.$route.params.articleId);
   },
 };
 </script>

@@ -37,7 +37,7 @@
         <v-btn
           color="deep-purple lighten-2"
           text
-          @click="goUrl('ArticleModify')"
+          @click="goUrlwithPrams('ArticleModify', $route.params.id)"
         >
           글 수정
         </v-btn>

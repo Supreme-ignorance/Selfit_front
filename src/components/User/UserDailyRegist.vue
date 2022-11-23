@@ -45,6 +45,9 @@ export default {
         type: this.type,
       };
 
+      this.time = "";
+      this.type = "";
+
       this.$store.dispatch("inputTime", daily);
     },
   },

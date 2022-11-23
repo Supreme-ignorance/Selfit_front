@@ -33,6 +33,27 @@ export default {
     },
   },
   actions: {
+    modifyArticle({ commit }, article) {
+      return new Promise((response, reject) => {
+        let API_URL = commonPath + "article/modify";
+        axios({
+          url: API_URL,
+          method: "PUT",
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
+          data: article,
+        })
+          .then((res) => {
+            commit;
+            response(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
+    },
     deleteArticle({ commit }, articleId) {
       return new Promise((response, reject) => {
         let API_URL = commonPath + "article/delete/" + articleId;
@@ -47,10 +68,7 @@ export default {
             commit;
             response(res.data);
             router.push({
-              name: "CommentList",
-              params: {
-                id: articleId,
-              },
+              name: "ArticleList",
             });
           })
           .catch((err) => {
@@ -73,6 +91,9 @@ export default {
           .then((res) => {
             commit;
             response(res.data);
+            router.push({
+              name: "ArticleList",
+            });
           })
           .catch((err) => {
             console.log(err);
