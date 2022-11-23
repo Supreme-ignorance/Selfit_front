@@ -8,7 +8,6 @@
           <v-img src="@/assets/sport.png" width="7" class="mx-10 my-7"></v-img>
           <v-img src="@/assets/meditation.png" width="7" class="mx-10 my-7"></v-img>
           <v-img src="@/assets/pilates.png" width="7" class="mx-10 my-7"></v-img>
-          
         </v-row>
       </v-col>
 
@@ -23,6 +22,9 @@
       </v-row>
       <v-layout justify-center style="width: 90%">
         <v-row>
+          
+
+
           <div v-for="video in getVideos" :key="video.videoId">
             <v-card
               @click="goUrl(video.videoId)"

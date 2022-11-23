@@ -10,17 +10,46 @@
       outlined
     >
     <v-container>
-      <v-img src="@/assets/profile.png" width="100" class="mx-5 my-7"></v-img>
-      <div v-if="getUserInfo">
-          <v-card-title class="text-h4 mx-2 mb-10"> {{getUserInfo.nickname}}
-          </v-card-title>
-      </div>
+      <v-layout>
+        <v-row>
+          <v-col>
+            <v-img id="profile" src="@/assets/baekho1.jpg" width="120" class="mx-5 my-7"></v-img>
+            <div v-if="getUserInfo">
+              <v-row>
+                <v-col>
+                  <v-card-title class="text-h4 mx-2"> {{getUserInfo.nickname}}
+                  </v-card-title>
+                </v-col>
+                <v-col>
+                  <div>
+                    <div>SELFIT과 함께한 시간</div>
+                    <div>{{extime}}</div>
+                  </div>
+                </v-col>
+              </v-row>
+            </div>
+            <v-card-text class="mt-1" v-if="getUserInfo.height>0 && getUserInfo.weight >0">
+              <v-row>
+                <v-col>
+                  <div>
+                    <div class="text-subtitle-1">
+                      키 : {{getUserInfo.height}} &nbsp; &nbsp; | &nbsp; 몸무게 : {{getUserInfo.weight}}
+                    </div>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </v-col>
+        </v-row>  
+      </v-layout>
+      
+        
         <v-row dense>
           <v-col cols="12">
             <v-card color="#E6E6E6">
-              <v-row align="center" class="mx-2">
+              <!-- <v-row align="center" class="mx-2 my-2">
                 
-              </v-row>
+              </v-row> -->
               <v-card-title class="text-h5 mt-2"> Level {{getUserInfo.level}} 
                 <v-spacer></v-spacer>
                 레벨업까지 {{ getUserInfo.exp }} exp
@@ -36,6 +65,9 @@
             </v-card>
           </v-col>
         </v-row>
+
+        
+
 
         <v-row dense>
           <v-col cols="12">
@@ -78,6 +110,11 @@ export default {
     callUser() {
       return this.$route.params.id;
     },
+    extime() {
+      let exp = this.getUserInfo.exp;
+      let level = this.getUserInfo.level;
+      return level*(level-1)/2 + exp;
+    }
   },
   created() {
     this.$store.dispatch("setDaily", this.callUser);
@@ -86,4 +123,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+/* #totalEx */
+#profile {
+  border-radius: 50%;
+}
+</style>
