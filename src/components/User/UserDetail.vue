@@ -30,6 +30,12 @@
                     <div>
                       <div>SELFIT과 함께한 시간</div>
                       <div>{{ extime }}</div>
+                      <!-- 차트 사용 참고 링크 https://github.com/djaxho/pure-vue-chart?ref=madewithvuejs.com -->
+                      <pure-vue-chart
+                        :points="[3,5,2,5,4]"
+                        :width="400"
+                        :height="200"
+                      />
                     </div>
                   </v-col>
                 </v-row>
@@ -125,11 +131,13 @@
 <script>
 import { CalendarHeatmap } from "vue-calendar-heatmap";
 import { mapGetters } from "vuex";
+import PureVueChart from 'pure-vue-chart';
 
 export default {
   name: "userDetail",
   components: {
     CalendarHeatmap,
+    PureVueChart,
   },
   computed: {
     ...mapGetters(["getDaily", "getContentWidth", "getUserInfo"]),
