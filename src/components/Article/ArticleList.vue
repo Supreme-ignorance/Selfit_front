@@ -40,6 +40,7 @@
                       id: item.articleId,
                     },
                   }"
+                  id="to"
                 >
                   {{ item.title }}
                 </router-link>
@@ -54,6 +55,7 @@
                       id: item.writerId,
                     },
                   }"
+                  id="to"
                 >
                   {{ item.writerNickName }}
                 </router-link>
@@ -113,4 +115,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scope>
+#to {
+  margin: 10px;
+  text-decoration: none;
+  color: black;
+}
+</style>
