@@ -22,8 +22,6 @@
           <v-data-table
             :headers="headers"
             :items="getArticles"
-            single-expand
-            :expanded.sync="expanded"
             item-key="articleId"
             :items-per-page="10"
             class="elevation-1"
