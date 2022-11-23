@@ -1,5 +1,7 @@
 <template>
   <v-container>
+    <v-list-item-title class="text-h6"> 운동 기록 </v-list-item-title>
+    <v-list-item-subtitle> 오늘도 고생하셨어요 </v-list-item-subtitle>
     <v-row align="center">
       <v-col md="4">
         <v-select :items="types" label="type" v-model="type"> </v-select
