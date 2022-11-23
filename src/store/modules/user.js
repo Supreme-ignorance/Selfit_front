@@ -31,7 +31,10 @@ export default {
     },
     LOGOUT(state) {
       sessionStorage.clear();
-      state.loginUser = null;
+      state.loginUser = {
+        id: sessionStorage.getItem("currentLogin_id"),
+        nickname: sessionStorage.getItem("currentLogin_nickname"),
+      };
     },
     SET_LOGIN_USER(state, id) {
       state.loginUser = id;

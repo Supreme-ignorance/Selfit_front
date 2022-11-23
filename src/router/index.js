@@ -90,8 +90,8 @@ const routes = [
         component: ArticleForm,
       },
       {
-        path: "modify",
-        name: "ArticleModify/:articleId",
+        path: "modify/:articleId",
+        name: "ArticleModify",
         component: ArticleModify,
       },
     ],

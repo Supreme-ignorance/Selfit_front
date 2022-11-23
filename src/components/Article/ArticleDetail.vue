@@ -30,12 +30,20 @@
       <v-divider class="mx-4"></v-divider>
 
       <v-card-actions>
-        <v-btn color="deep-purple lighten-2" text @click="goCommentForm()">
+        <v-btn color="deep-purple lighten-2" text @click="goUrl('CommentForm')">
           댓글 작성
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn color="deep-purple lighten-2" text> 글 수정 </v-btn>
-        <v-btn color="deep-purple lighten-2" text> 글 삭제 </v-btn>
+        <v-btn
+          color="deep-purple lighten-2"
+          text
+          @click="goUrl('ArticleModify')"
+        >
+          글 수정
+        </v-btn>
+        <v-btn color="deep-purple lighten-2" text @click="goUrl('CommentForm')">
+          글 삭제
+        </v-btn>
       </v-card-actions>
 
       <v-divider class="mx-4"></v-divider>
@@ -60,8 +68,10 @@ export default {
     goUrl(url) {
       this.$router.push({ name: url }).catch(() => {});
     },
-    goCommentForm() {
-      this.$router.push({ name: "CommentForm" }).catch(() => {});
+    goUrlwithPrams(url, articleId) {
+      this.$router
+        .push({ name: url, params: { articleId: articleId } })
+        .catch(() => {});
     },
   },
   created() {
