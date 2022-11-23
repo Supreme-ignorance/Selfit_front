@@ -33,6 +33,12 @@
 
     <v-navigation-drawer v-model="drawer" absolute bottom temporary>
       <v-list nav>
+        <v-list-item>
+          <dailyRegist></dailyRegist>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
         <v-list-item-group
           v-model="group"
           active-class="deep-purple--text text--accent-3"
@@ -74,6 +80,8 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+import dailyRegist from "@/components/User/UserDailyRegist.vue";
+
 export default {
   name: "MyHeader",
   data() {
@@ -81,6 +89,9 @@ export default {
       drawer: false,
       group: null,
     };
+  },
+  components: {
+    dailyRegist,
   },
   methods: {
     logout() {

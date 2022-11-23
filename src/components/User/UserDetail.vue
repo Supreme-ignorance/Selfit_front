@@ -9,19 +9,19 @@
       tile
       outlined
     >
-    <v-container>
-      <v-img src="@/assets/profile.png" width="100" class="mx-5 my-7"></v-img>
-      <div v-if="getUserInfo">
-          <v-card-title class="text-h4 mx-2 mb-10"> {{getUserInfo.nickname}}
+      <v-container>
+        <v-img src="@/assets/profile.png" width="100" class="mx-5 my-7"></v-img>
+        <div v-if="getUserInfo">
+          <v-card-title class="text-h4 mx-2 mb-10">
+            {{ getUserInfo.nickname }}
           </v-card-title>
-      </div>
+        </div>
         <v-row dense>
           <v-col cols="12">
             <v-card color="#E6E6E6">
-              <v-row align="center" class="mx-2">
-                
-              </v-row>
-              <v-card-title class="text-h5 mt-2"> Level {{getUserInfo.level}} 
+              <v-row align="center" class="mx-2"> </v-row>
+              <v-card-title class="text-h5 mt-2">
+                Level {{ getUserInfo.level }}
                 <v-spacer></v-spacer>
                 레벨업까지 {{ getUserInfo.exp }} exp
               </v-card-title>
