@@ -30,13 +30,19 @@
       <v-divider class="mx-4"></v-divider>
 
       <v-card-actions>
-        <v-btn color="deep-purple lighten-2" text @click="goUrl('CommentForm')">
+        <v-btn
+          color="deep-purple lighten-2"
+          text
+          v-if="getLoginUser.id"
+          @click="goUrl('CommentForm')"
+        >
           댓글 작성
         </v-btn>
         <v-spacer></v-spacer>
         <v-btn
           color="deep-purple lighten-2"
           text
+          v-if="isMy()"
           @click="goUrlwithPrams('ArticleModify', $route.params.id)"
         >
           글 수정
@@ -44,6 +50,7 @@
         <v-btn
           color="deep-purple lighten-2"
           text
+          v-if="isMy()"
           @click="deleteArticle(getArticle.articleId)"
         >
           글 삭제
@@ -66,7 +73,7 @@ export default {
   },
   computed: {
     ...mapState(["articles"]),
-    ...mapGetters(["getArticle", "getContentWidth"]),
+    ...mapGetters(["getArticle", "getContentWidth", "getLoginUser"]),
   },
   methods: {
     goUrl(url) {
@@ -79,6 +86,9 @@ export default {
     },
     deleteArticle(articleId) {
       this.$store.dispatch("deleteArticle", articleId);
+    },
+    isMy() {
+      return this.getArticle.writerId == this.getLoginUser.id;
     },
   },
   created() {

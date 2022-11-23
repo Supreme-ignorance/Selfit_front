@@ -44,7 +44,7 @@
         <div class="black--text my-1">{{ comment.content }}</div>
       </v-card-text>
 
-      <v-card-actions v-if="isMycomment">
+      <v-card-actions v-if="isMy">
         <v-spacer></v-spacer>
         <v-btn color="deep-purple lighten-2" text @click="activeModify()">
           수정
@@ -68,9 +68,9 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getContentWidth"]),
-    isMycomment() {
-      return this.comment.writer == sessionStorage.getItem("currentLogin_id");
+    ...mapGetters(["getContentWidth", "getLoginUser"]),
+    isMy() {
+      return this.comment.writer == this.getLoginUser.id;
     },
   },
   props: ["comment"],

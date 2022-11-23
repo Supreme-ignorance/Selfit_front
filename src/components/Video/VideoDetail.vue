@@ -17,6 +17,7 @@
           text
           icon
           class="mx-10"
+          v-if="getLoginUser.id"
           @click="like(getVideo.videoId)"
         >
           <v-icon>mdi-thumb-up</v-icon>
@@ -61,7 +62,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "video-Detail",
   computed: {
-    ...mapGetters(["getVideo", "getContentWidth"]),
+    ...mapGetters(["getVideo", "getContentWidth", "getLoginUser"]),
   },
   methods: {
     like(videoId) {

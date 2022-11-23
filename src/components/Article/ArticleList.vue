@@ -5,7 +5,7 @@
       <v-divider></v-divider>
       <v-row align="center">
         <v-spacer></v-spacer>
-        <div class="my-7 d-flex flex-row-reverse">
+        <div class="my-7 d-flex flex-row-reverse" v-if="getLoginUser.id">
           <v-btn
             color="deep-purple lighten-2"
             text
