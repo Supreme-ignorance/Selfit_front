@@ -1,8 +1,10 @@
 <template>
   <v-container>
     <v-row align="center">
-      <v-spacer></v-spacer>
-      <v-col md="6">
+      <v-col md="4">
+        <v-select :items="types" label="type" v-model="type"> </v-select
+      ></v-col>
+      <v-col md="3">
         <v-text-field
           v-model="time"
           label="time"
@@ -25,7 +27,9 @@ export default {
   name: "user-daily-regist",
   data() {
     return {
+      type: null,
       time: null,
+      types: ["홈트", "피트니스", "요가", "필라테스"],
     };
   },
   computed: {
@@ -36,6 +40,7 @@ export default {
       let daily = {
         userId: this.getLoginUser.id,
         count: this.time,
+        type: this.type,
       };
 
       this.$store.dispatch("inputTime", daily);
