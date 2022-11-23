@@ -32,16 +32,32 @@
               {{ index + 1 }}
             </template>
             <template v-slot:[`item.title`]="{ item }">
-              <router-link
-                :to="{
-                  name: 'CommentList',
-                  params: {
-                    id: item.articleId,
-                  },
-                }"
-              >
-                {{ item.title }}
-              </router-link>
+              <v-chip color="">
+                <router-link
+                  :to="{
+                    name: 'CommentList',
+                    params: {
+                      id: item.articleId,
+                    },
+                  }"
+                >
+                  {{ item.title }}
+                </router-link>
+              </v-chip>
+            </template>
+            <template v-slot:[`item.writerNickName`]="{ item }">
+              <v-chip color="">
+                <router-link
+                  :to="{
+                    name: 'detail',
+                    params: {
+                      id: item.writerId,
+                    },
+                  }"
+                >
+                  {{ item.writerNickName }}
+                </router-link>
+              </v-chip>
             </template>
           </v-data-table>
         </v-layout>
