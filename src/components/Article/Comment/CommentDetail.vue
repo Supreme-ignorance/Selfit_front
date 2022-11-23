@@ -7,7 +7,7 @@
       v-if="isModify"
     >
       <v-card-text>
-        <h3 class="black--text mb-3">{{ getMyNickName }}</h3>
+        <h3 class="black--text mb-3">{{ comment.writerNickname }}</h3>
         <v-textarea
           outlined
           name="input-6-3"
@@ -19,11 +19,11 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="deep-purple lighten-2" text @click="goBack()">
+        <v-btn color="deep-purple lighten-2" text @click="activeModify()">
           취소
         </v-btn>
-        <v-btn color="deep-purple lighten-2" text @click="writeComment()">
-          등록
+        <v-btn color="deep-purple lighten-2" text @click="updateComment()">
+          수정
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -64,6 +64,7 @@ export default {
   data() {
     return {
       isModify: false,
+      content: "",
     };
   },
   computed: {
@@ -72,10 +73,17 @@ export default {
   props: ["comment"],
   methods: {
     activeModify() {
+      this.content = this.comment.content;
       this.isModify = !this.isModify;
     },
     deleteComment() {
       this.$store.dispatch("deleteComment", this.comment.commentId);
+    },
+    updateComment() {
+      let comment = this.comment;
+      comment.content = this.content;
+      this.$store.dispatch("updateComment", comment);
+      this.isModify = !this.isModify;
     },
   },
 };

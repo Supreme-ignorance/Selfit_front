@@ -23,9 +23,6 @@ export default {
   },
   computed: {
     ...mapGetters(["getArticleId", "getComments", "getContentWidth"]),
-    id() {
-      return this.getArticleId(this.$route.params.idx);
-    },
     form() {
       return this.$route.fullPath.includes("cw");
     },
@@ -45,40 +42,6 @@ export default {
           data[this.$route.params.idx - 1].articleId
         );
       });
-  },
-  watch: {
-    id: function () {
-      this.$store
-        .dispatch("callBoardsPromise")
-        .then(() => {
-          return this.$store.dispatch(
-            "callArticlesPromise",
-            this.$route.params.boardSeq
-          );
-        })
-        .then((data) => {
-          this.$store.dispatch(
-            "callcomments",
-            data[this.$route.params.idx - 1].articleId
-          );
-        });
-    },
-    getComments: function () {
-      this.$store
-        .dispatch("callBoardsPromise")
-        .then(() => {
-          return this.$store.dispatch(
-            "callArticlesPromise",
-            this.$route.params.boardSeq
-          );
-        })
-        .then((data) => {
-          this.$store.dispatch(
-            "callcomments",
-            data[this.$route.params.idx - 1].articleId
-          );
-        });
-    },
   },
 };
 </script>

@@ -98,7 +98,7 @@ export default {
   computed: {
     ...mapGetters(["getLoginUser", "getBoards"]),
     getUser() {
-      if (this.getLoginUser) {
+      if (this.getLoginUser.id) {
         return true;
       } else {
         return false;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view />
+    <router-view :key="$route.fullPath" />
     <v-divider></v-divider>
     <v-container>
       <div class="mt-3 d-flex flex-row-reverse">
