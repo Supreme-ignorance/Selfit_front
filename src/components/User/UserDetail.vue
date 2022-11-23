@@ -98,7 +98,26 @@
             </v-card>
           </v-col>
         </v-row>
+        <v-row>
+          <v-col>
+            <div>
+              <div>내가 팔로우 하는 사람</div>
+              <v-divider></v-divider>
+              <div>{{ extime }}</div>
+            </div>
+          </v-col>
+          <v-col>
+            <div>
+              <div>나를 팔로우 하는 사람</div>
+              <v-divider></v-divider>
+                <div>{{ extime }}</div>
+              </div>
+          </v-col>
+        </v-row>
       </v-container>
+      <v-contain>
+        
+      </v-contain>
     </v-card>
   </div>
 </template>
