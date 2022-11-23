@@ -55,6 +55,7 @@ export default {
           .then((res) => {
             commit;
             response(res.data);
+            alert("운동이 기록되었습니다.");
           })
           .catch((err) => {
             console.log(err);
