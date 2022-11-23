@@ -10,31 +10,18 @@
     outlined
     >
     <v-container>
-      <v-img src="@/assets/profile.png" width="100" class="mx-10 my-10"></v-img>
+      <v-img src="@/assets/profile.png" width="100" class="mx-5 my-7"></v-img>
       <div v-if="getUserInfo">
-        <h3 class="mx-10 my-10">
-          {{getUserInfo.nickname}}
-        </h3>
+          <v-card-title class="text-h4 mx-2 mb-10"> {{getUserInfo.nickname}}
+          </v-card-title>
       </div>
         <v-row dense>
           <v-col cols="12">
-
-            <v-card-text>
+            <v-card color="#E6E6E6">
               <v-row align="center" class="mx-2">
-                <div>채널 : {{ getUserInfo.exp }}</div>
-                <v-spacer></v-spacer>
-                <div>
-                  좋아요 :
-                  {{ getUserInfo.exp }}
-                </div>
+                
               </v-row>
-            </v-card-text>
-
-            <v-card color="#385F73" dark>
-              <v-row align="center" class="mx-2">
-
-              </v-row>
-              <v-card-title class="text-h5"> Level {{getUserInfo.level}} 
+              <v-card-title class="text-h5 mt-2"> Level {{getUserInfo.level}} 
                 <v-spacer></v-spacer>
                 레벨업까지 {{ getUserInfo.exp }} exp
               </v-card-title>

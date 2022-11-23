@@ -1,6 +1,14 @@
 <template>
   <div>
     <v-container>
+      <v-row align="center">
+        <v-col class="d-flex" cols="12" sm="4">
+          <v-select :items="items" label="정렬 기준">
+          </v-select>
+          <v-select class="mx-2" :items="items" label="정렬 순서">
+          </v-select>
+        </v-col>
+      </v-row>
       <v-layout justify-center style="width: 90%">
         <v-row>
           <div v-for="likedVideo in getLikedVideos" :key="likedVideo.videoId">
