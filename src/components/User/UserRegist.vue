@@ -58,6 +58,9 @@
                     label="gender"
                   ></v-select>
                   <div class="mt-3 d-flex flex-row-reverse">
+                    <v-btn color="deep-purple lighten-2" text @click="goBack()">
+                      취소
+                    </v-btn>
                     <v-btn color="blue" class="mr-4" @click="register()">
                       회원가입
                     </v-btn>
@@ -91,6 +94,9 @@ export default {
     };
   },
   methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
     register() {
       let user = {
         id: this.id,

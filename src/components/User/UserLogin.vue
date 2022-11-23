@@ -21,6 +21,9 @@
                     required
                   ></v-text-field>
                   <div class="mt-3 d-flex flex-row-reverse">
+                    <v-btn color="deep-purple lighten-2" text @click="goBack()">
+                      취소
+                    </v-btn>
                     <v-btn color="blue lighten-4" class="mr-4" @click="login()">
                       로그인
                     </v-btn>
@@ -45,6 +48,9 @@ export default {
     };
   },
   methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
     login() {
       let user = {
         id: this.id,
