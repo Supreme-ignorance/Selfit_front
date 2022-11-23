@@ -46,7 +46,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item v-if="getLoginUser">
+          <v-list-item v-if="getLoginUser.id">
             <v-list-item-content @click="goUrl('/video/likedlist')">
               <v-list-item-title class="text-h6"> 좋아요 </v-list-item-title>
               <v-list-item-subtitle> 우리 모두 좋아요 </v-list-item-subtitle>
