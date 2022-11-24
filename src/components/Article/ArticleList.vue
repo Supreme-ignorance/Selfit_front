@@ -4,13 +4,15 @@
     <v-container id="outer">
       <v-divider></v-divider>
       <v-row align="center">
-        <v-btn
-          color="deep-purple lighten-2"
-          text
-          class="mr-5 px-10"
-          @click="goBoard($route.params.boardSeq)"
-          >{{ getBoards[$route.params.boardSeq - 1].boardName }}
-        </v-btn>
+        <div class="my-7 d-flex flex-row-reverse">
+          <v-btn
+            color="deep-purple lighten-2"
+            text
+            class="mr-5 px-10"
+            @click="goBoard($route.params.boardSeq)"
+            >{{ getBoards[$route.params.boardSeq - 1].boardName }}
+          </v-btn>
+        </div>
         <v-spacer></v-spacer>
         <div class="my-7 d-flex flex-row-reverse" v-if="getLoginUser.id">
           <v-btn color="deep-purple lighten-2" text class="mr-5">

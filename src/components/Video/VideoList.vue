@@ -9,6 +9,7 @@
       <v-layout class="grey lighten-5">
         <v-row justify="space-around">
           <v-img
+            id="btn"
             src="@/assets/all.png"
             max-width="150"
             max-height="150"
@@ -16,6 +17,7 @@
             @click="getVideoList('모두')"
           ></v-img>
           <v-img
+            id="btn"
             src="@/assets/house.png"
             max-width="150"
             max-height="150"
@@ -23,6 +25,7 @@
             @click="getVideoList('홈트')"
           ></v-img>
           <v-img
+            id="btn"
             src="@/assets/sport.png"
             max-width="150"
             max-height="150"
@@ -30,6 +33,7 @@
             @click="getVideoList('피트니스')"
           ></v-img>
           <v-img
+            id="btn"
             src="@/assets/meditation.png"
             max-width="150"
             max-height="150"
@@ -37,6 +41,7 @@
             @click="getVideoList('요가')"
           ></v-img>
           <v-img
+            id="btn"
             src="@/assets/pilates.png"
             max-width="150"
             max-height="150"
