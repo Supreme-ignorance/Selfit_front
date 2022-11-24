@@ -33,9 +33,9 @@
                     type="number"
                   ></v-text-field>
                   <v-select
-                    v-model="infoDisclose"
+                    v-model="getUserInfo.infoDisclose"
                     label="개인정보 공개여부"
-                    :items="booleans"
+                    :items="items"
                   ></v-select>
 
                   <div class="mt-3 d-flex flex-row-reverse">
@@ -64,7 +64,16 @@ export default {
     return {
       infoDisclose: null,
       show: false,
-      booleans: [true, false],
+      items: [
+        {
+          text: "true",
+          value: true,
+        },
+        {
+          text: "false",
+          value: false,
+        },
+      ],
     };
   },
   computed: {
@@ -80,7 +89,7 @@ export default {
         password: this.getUserInfo.password,
         height: this.getUserInfo.height,
         weight: this.getUserInfo.weight,
-        infoDisclose: this.infoDisclose,
+        infoDisclose: this.getUserInfo.infoDisclose,
       };
 
       this.$store.dispatch("modifyUser", user);

@@ -136,14 +136,14 @@
           </v-col>
         </v-row>
 
-        <v-row dense class="my-1">
+        <v-row dense class="my-2">
           <v-col cols="12">
             <v-card :color="color">
               <v-card-text
                 v-if="
                   getUserInfo?.height > 0 &&
                   getUserInfo?.weight > 0 &&
-                  getUserInfo?.infoDisclose
+                  getUserInfo?.isInfoDisclose
                 "
               >
                 키 : {{ getUserInfo?.height }} &nbsp; &nbsp; | &nbsp; 몸무게 :
@@ -242,7 +242,6 @@ export default {
 
       this.$store.dispatch("createFollow", payload);
       this.isCheck = !this.isCheck;
-      this.$router.go();
     },
     unfollow() {
       let payload = {
@@ -252,7 +251,6 @@ export default {
 
       this.$store.dispatch("deleteFollow", payload);
       this.isCheck = !this.isCheck;
-      this.$router.go();
     },
     goModify(id) {
       this.$router.push({ name: "modify", params: { id: id } }).catch(() => {});

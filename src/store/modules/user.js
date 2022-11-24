@@ -39,6 +39,7 @@ export default {
   actions: {
     modifyUser({ commit }, user) {
       const API_URL = commonPath + `user/update`;
+      console.log(user);
       axios({
         url: API_URL,
         method: "PUT",
@@ -51,7 +52,7 @@ export default {
           commit;
           res;
           alert("수정 성공");
-          router.push({ name: "detail" });
+          router.push({ name: "home" });
         })
         .catch((err) => {
           alert("수정 실패");
