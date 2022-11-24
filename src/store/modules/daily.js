@@ -1,3 +1,4 @@
+import router from "@/router";
 import axios from "axios";
 
 const commonPath = "http://localhost:9999/api/";
@@ -55,6 +56,7 @@ export default {
             commit;
             response(res.data);
             alert("운동이 기록되었습니다.");
+            router.go();
           })
           .catch((err) => {
             console.log(err);

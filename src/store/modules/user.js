@@ -53,6 +53,7 @@ export default {
     },
     logout({ commit }) {
       commit("LOGOUT");
+      router.push({ name: "home" });
     },
     setLoginUser({ commit }, login) {
       const API_URL = commonPath + `user/login`;
@@ -114,6 +115,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          alert("로그인 실패!");
         });
     },
     registUser({ commit }, user) {
@@ -126,9 +128,11 @@ export default {
         .then((res) => {
           commit;
           res;
-          console.log("회원가입 성공");
+          alert("회원가입 성공");
+          router.push({ name: "login" });
         })
         .catch((err) => {
+          alert("회원가입 실패");
           console.log(err);
         });
     },

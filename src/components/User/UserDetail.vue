@@ -24,7 +24,7 @@
                         class="mx-5 my-7"
                       ></v-img>
                       <v-card-title class="text-h4 mx-2">
-                        {{ getUserInfo.nickname }}
+                        {{ getUserInfo?.nickname }}
                       </v-card-title>
                       <v-card-text
                         >SELFIT과 함께한 시간 | {{ extime }}
@@ -59,10 +59,10 @@
                       <!-- 차트 사용 참고 링크 https://github.com/djaxho/pure-vue-chart?ref=madewithvuejs.com -->
                       <pure-vue-chart
                         :points="[
-                          { label: '홈트', value: getDailyType[1].count },
-                          { label: '요가', value: getDailyType[0].count },
-                          { label: '피트니스', value: getDailyType[3].count },
-                          { label: '필라테스', value: getDailyType[2].count },
+                          { label: '홈트', value: getDailyType[1]?.count },
+                          { label: '요가', value: getDailyType[0]?.count },
+                          { label: '피트니스', value: getDailyType[3]?.count },
+                          { label: '필라테스', value: getDailyType[2]?.count },
                         ]"
                         :width="400"
                         :height="200"
@@ -82,17 +82,17 @@
         <v-row dense>
           <v-col cols="12">
             <v-card :color="color">
-              <v-card-title class="text-h5">
-                Level {{ getUserInfo.level }}
+              <v-card-title class="">
+                Level {{ getUserInfo?.level }}
                 <v-spacer></v-spacer>
-                레벨업까지 {{ getUserInfo.exp }} exp
+                레벨업까지 {{ getUserInfo?.level * 100 - getUserInfo?.exp }} exp
               </v-card-title>
               <v-container>
                 <!-- 경험치 바 -->
                 <v-progress-linear
                   color="light-blue"
                   height="20"
-                  :value="getUserInfo.exp / getUserInfo.level"
+                  :value="getUserInfo?.exp / getUserInfo?.level"
                   striped
                 ></v-progress-linear>
               </v-container>
@@ -127,10 +127,10 @@
           <v-col cols="12">
             <v-card :color="color">
               <v-card-text
-                v-if="getUserInfo.height > 0 && getUserInfo.weight > 0"
+                v-if="getUserInfo?.height > 0 && getUserInfo?.weight > 0"
               >
-                키 : {{ getUserInfo.height }} &nbsp; &nbsp; | &nbsp; 몸무게 :
-                {{ getUserInfo.weight }}
+                키 : {{ getUserInfo?.height }} &nbsp; &nbsp; | &nbsp; 몸무게 :
+                {{ getUserInfo?.weight }}
               </v-card-text>
             </v-card>
           </v-col>
@@ -144,12 +144,54 @@
                   <div>
                     <v-card-title>팔로우</v-card-title>
                     <v-divider></v-divider>
+                    <v-row>
+                      <v-col
+                        dense
+                        class="ma-2"
+                        v-for="following in getFollowings"
+                        :key="following.followIndex"
+                        cols="4"
+                      >
+                        <v-card height="30" align="center">
+                          <router-link
+                            :to="{
+                              name: detail,
+                              params: { id: following.followerId },
+                            }"
+                            id="to"
+                          >
+                            {{ following.nickname }}
+                          </router-link>
+                        </v-card>
+                      </v-col>
+                    </v-row>
                   </div>
                 </v-col>
                 <v-col>
                   <div>
                     <v-card-title>팔로워</v-card-title>
                     <v-divider></v-divider>
+                    <v-row>
+                      <v-col
+                        dense
+                        class="ma-2"
+                        v-for="follower in getFollowers"
+                        :key="follower.followIndex"
+                        cols="4"
+                      >
+                        <v-card height="30" align="center">
+                          <router-link
+                            :to="{
+                              name: detail,
+                              params: { id: follower.userId },
+                            }"
+                            id="to"
+                          >
+                            {{ follower.nickname }}
+                          </router-link>
+                        </v-card>
+                      </v-col>
+                    </v-row>
                   </div>
                 </v-col>
               </v-row>
@@ -171,6 +213,7 @@ export default {
   data() {
     return {
       color: "#FEEEF1",
+      isCheck: null,
     };
   },
   components: {
@@ -184,18 +227,23 @@ export default {
       "getUserInfo",
       "getDailyType",
       "getLoginUser",
+      "getFollowings",
+      "getFollowers",
     ]),
     isMy() {
-      return this.getUserInfo.id == this.getLoginUser.id;
+      return this.getUserInfo?.id == this.getLoginUser?.id;
     },
     extime() {
-      let time = 0;
+      let min = 0;
 
       this.getDaily.forEach((currentElement) => {
-        time += currentElement.count * 1;
+        min += currentElement.count * 1;
       });
 
-      return time;
+      let time = Math.floor(min / 60);
+      min %= 60;
+
+      return time + "시간 " + min + "분";
     },
   },
   created() {
@@ -206,6 +254,12 @@ export default {
       })
       .then(() => {
         return this.$store.dispatch("setDailyType", this.$route.params.id);
+      })
+      .then(() => {
+        return this.$store.dispatch("setFollowingList", this.$route.params.id);
+      })
+      .then(() => {
+        return this.$store.dispatch("setFollowerList", this.$route.params.id);
       });
   },
 };

@@ -5,6 +5,7 @@ import video from "./modules/video";
 import board from "./modules/board";
 import comment from "./modules/comment";
 import daily from "./modules/daily";
+import follow from "./modules/follow";
 
 Vue.use(Vuex);
 
@@ -19,5 +20,5 @@ export default new Vuex.Store({
   },
   mutations: {},
   actions: {},
-  modules: { user, video, board, comment, daily },
+  modules: { user, video, board, comment, daily, follow },
 });
