@@ -9,7 +9,7 @@
           text
           class="mr-5 px-10"
           @click="goBoard($route.params.boardSeq)"
-          >{{ getBoards[$route.params.boardSeq].boardName }}
+          >{{ getBoards[$route.params.boardSeq - 1].boardName }}
         </v-btn>
         <v-spacer></v-spacer>
         <div class="my-7 d-flex flex-row-reverse" v-if="getLoginUser.id">
