@@ -32,6 +32,9 @@ export default {
         axios({
           url: API_URL,
           method: "GET",
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
         })
           .then((res) => {
             console.log("daily setting...");
@@ -51,6 +54,9 @@ export default {
           url: API_URL,
           method: "POST",
           data: daily,
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
         })
           .then((res) => {
             commit;
@@ -70,6 +76,9 @@ export default {
         axios({
           url: API_URL,
           method: "GET",
+          headers: {
+            "access-token": sessionStorage.getItem("access-token"),
+          },
         })
           .then((res) => {
             console.log("daily setting...");

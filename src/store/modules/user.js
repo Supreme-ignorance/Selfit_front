@@ -42,6 +42,9 @@ export default {
       axios({
         url: API_URL,
         method: "GET",
+        headers: {
+          "access-token": sessionStorage.getItem("access-token"),
+        },
       })
         .then((res) => {
           console.log("info setting...");
@@ -124,6 +127,9 @@ export default {
         url: API_URL,
         method: "POST",
         data: user,
+        headers: {
+          "access-token": sessionStorage.getItem("access-token"),
+        },
       })
         .then((res) => {
           commit;

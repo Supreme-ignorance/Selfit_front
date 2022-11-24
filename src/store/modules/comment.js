@@ -68,6 +68,9 @@ export default {
       axios({
         url: API_URL,
         method: "GET",
+        headers: {
+          "access-token": sessionStorage.getItem("access-token"),
+        },
       })
         .then((res) => {
           commit("CALL_COMMENTS", res.data);
@@ -82,6 +85,9 @@ export default {
         url: API_URL,
         method: "POST",
         data: comment,
+        headers: {
+          "access-token": sessionStorage.getItem("access-token"),
+        },
       })
         .then(() => {
           console.log("comment writing...");
