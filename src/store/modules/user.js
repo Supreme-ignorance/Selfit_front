@@ -37,6 +37,27 @@ export default {
     },
   },
   actions: {
+    modifyUser({ commit }, user) {
+      const API_URL = commonPath + `user/update`;
+      axios({
+        url: API_URL,
+        method: "PUT",
+        data: user,
+        headers: {
+          "access-token": sessionStorage.getItem("access-token"),
+        },
+      })
+        .then((res) => {
+          commit;
+          res;
+          alert("수정 성공");
+          router.push({ name: "detail" });
+        })
+        .catch((err) => {
+          alert("수정 실패");
+          console.log(err);
+        });
+    },
     setUserInfo({ commit }, id) {
       const API_URL = commonPath + "user/" + id;
       axios({
@@ -57,6 +78,7 @@ export default {
     logout({ commit }) {
       commit("LOGOUT");
       router.push({ name: "home" });
+      router.go();
     },
     setLoginUser({ commit }, login) {
       const API_URL = commonPath + `user/login`;

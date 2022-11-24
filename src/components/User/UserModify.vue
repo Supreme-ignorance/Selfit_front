@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="getUserInfo">
     <div class="col mt-12"></div>
     <v-container style="width: 450px">
       <v-layout align-center row wrap>
@@ -13,50 +13,31 @@
               </v-toolbar>
               <div class="pa-5">
                 <v-form ref="form" lazy-validation>
-                  <v-divider class="mx-4"></v-divider>
-                  <v-text-field v-model="id" label="id"></v-text-field>
                   <v-text-field
-                    v-model="password"
+                    v-model="getUserInfo.password"
                     :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
                     label="password"
                     :type="show ? 'text' : 'password'"
+                    required
                     @click:append="show = !show"
                   ></v-text-field>
-                  <v-divider class="mx-4"></v-divider>
-
-                  <v-text-field v-model="name" label="name"></v-text-field>
-                  <v-text-field
-                    v-model="nickname"
-                    label="nickname"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="email"
-                    label="email"
-                    type="email"
-                  ></v-text-field>
-
-                  <v-divider class="mx-4"></v-divider>
 
                   <v-text-field
-                    v-model="age"
-                    label="age"
-                    type="number"
-                  ></v-text-field
-                  ><v-text-field
-                    v-model="height"
+                    v-model="getUserInfo.height"
                     label="height"
                     type="number"
-                  ></v-text-field
-                  ><v-text-field
-                    v-model="weight"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="getUserInfo.weight"
                     label="weight"
                     type="number"
                   ></v-text-field>
                   <v-select
-                    v-model="gender"
-                    :items="genders"
-                    label="gender"
+                    v-model="infoDisclose"
+                    label="개인정보 공개여부"
+                    :items="booleans"
                   ></v-select>
+
                   <div class="mt-3 d-flex flex-row-reverse">
                     <v-btn color="deep-purple lighten-2" text @click="goBack()">
                       취소
@@ -76,22 +57,18 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "regist-form",
   data() {
     return {
-      id: "",
-      password: "",
-      name: "",
-      nickname: "",
-      gender: "",
-      age: 0,
-      email: "",
-      height: 0,
-      weight: 0,
-      genders: ["man", "woman"],
+      infoDisclose: null,
       show: false,
+      booleans: [true, false],
     };
+  },
+  computed: {
+    ...mapGetters(["getUserInfo"]),
   },
   methods: {
     goBack() {
@@ -99,22 +76,19 @@ export default {
     },
     modify() {
       let user = {
-        id: this.id,
-        password: this.password,
-        level: null,
-        exp: null,
-        name: this.name,
-        nickname: this.nickname,
-        gender: this.gender,
-        age: this.age,
-        email: this.email,
-        height: this.height,
-        weight: this.weight,
-        InfoDisclose: null,
+        id: this.$route.params.id,
+        password: this.getUserInfo.password,
+        height: this.getUserInfo.height,
+        weight: this.getUserInfo.weight,
+        infoDisclose: this.infoDisclose,
       };
 
-      this.$store.dispatch("registUser", user);
+      this.$store.dispatch("modifyUser", user);
+      this.$store.dispatch("logout");
     },
+  },
+  created() {
+    this.$store.dispatch("setUserInfo", this.$route.params.id);
   },
 };
 </script>

@@ -136,11 +136,15 @@
           </v-col>
         </v-row>
 
-        <v-row dense>
+        <v-row dense class="my-1">
           <v-col cols="12">
             <v-card :color="color">
               <v-card-text
-                v-if="getUserInfo?.height > 0 && getUserInfo?.weight > 0"
+                v-if="
+                  getUserInfo?.height > 0 &&
+                  getUserInfo?.weight > 0 &&
+                  getUserInfo?.infoDisclose
+                "
               >
                 키 : {{ getUserInfo?.height }} &nbsp; &nbsp; | &nbsp; 몸무게 :
                 {{ getUserInfo?.weight }}
@@ -149,7 +153,7 @@
           </v-col>
         </v-row>
 
-        <v-row dense class="my-2">
+        <v-row dense class="my-1">
           <v-col cols="12">
             <v-card :color="color">
               <v-row>
