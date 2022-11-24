@@ -73,9 +73,9 @@
                       <pure-vue-chart
                         :points="[
                           { label: '홈트', value: getDailyType[1]?.count },
-                          { label: '요가', value: getDailyType[0]?.count },
-                          { label: '피트니스', value: getDailyType[3]?.count },
-                          { label: '필라테스', value: getDailyType[2]?.count },
+                          { label: '요가', value: getDailyType[3]?.count },
+                          { label: '피트니스', value: getDailyType[2]?.count },
+                          { label: '필라테스', value: getDailyType[0]?.count },
                         ]"
                         :width="400"
                         :height="200"
@@ -242,6 +242,7 @@ export default {
 
       this.$store.dispatch("createFollow", payload);
       this.isCheck = !this.isCheck;
+      this.$router.go();
     },
     unfollow() {
       let payload = {
@@ -251,6 +252,7 @@ export default {
 
       this.$store.dispatch("deleteFollow", payload);
       this.isCheck = !this.isCheck;
+      this.$router.go();
     },
     goModify(id) {
       this.$router.push({ name: "modify", params: { id: id } }).catch(() => {});

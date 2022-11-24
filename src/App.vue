@@ -2,6 +2,7 @@
   <v-app>
     <myHeader :key="isNull"></myHeader>
     <router-view />
+    <myFooter></myFooter>
   </v-app>
 </template>
 
