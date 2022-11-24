@@ -12,6 +12,7 @@ export default {
     },
     boards: [],
     daily: [],
+    dailyType: [],
     userInfo: null,
   },
   getters: {
@@ -21,6 +22,9 @@ export default {
     getDaily(state) {
       return state.daily;
     },
+    getDailyType(state) {
+      return state.dailyType;
+    },
     getUserInfo(state) {
       return state.userInfo;
     },
@@ -28,6 +32,9 @@ export default {
   mutations: {
     SET_DAILY(state, daily) {
       state.daily = daily;
+    },
+    SET_DAILYTYPE(state, dailyType) {
+      state.dailyType = dailyType;
     },
     LOGOUT(state) {
       sessionStorage.clear();
@@ -44,6 +51,24 @@ export default {
     },
   },
   actions: {
+    setDailyType({ commit }, id) {
+      return new Promise((response, reject) => {
+        const API_URL = commonPath + "daily/groupType/" + id;
+        axios({
+          url: API_URL,
+          method: "GET",
+        })
+          .then((res) => {
+            console.log("daily setting...");
+            commit("SET_DAILYTYPE", res.data);
+            response(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
+    },
     inputTime({ commit }, daily) {
       return new Promise((response, reject) => {
         const API_URL = commonPath + "daily/write";

@@ -10,82 +10,79 @@
       outlined
     >
       <v-container>
-        <v-layout>
-          <v-row>
-            <v-col>
-              <v-img
-                id="profile"
-                src="@/assets/baekho1.jpg"
-                width="120"
-                class="mx-5 my-7"
-              ></v-img>
-              <div v-if="getUserInfo">
-                <v-row>
-                  <v-col>
-                    <v-card-title class="text-h4 mx-2">
-                      {{ getUserInfo.nickname }}
-                    </v-card-title>
-                  </v-col>
-                  <v-col>
+        <v-row dense class="my-3">
+          <v-col cols="12">
+            <v-card :color="color">
+              <v-row>
+                <v-col cols="4" align-self="center">
+                  <v-row justify="center">
                     <div>
-                      <div>SELFIT과 함께한 시간</div>
-                      <div>{{ extime }}</div>
+                      <v-img
+                        id="profile"
+                        src="@/assets/baekho1.jpg"
+                        width="120"
+                        class="mx-5 my-7"
+                      ></v-img>
+                      <v-card-title class="text-h4 mx-2">
+                        {{ getUserInfo.nickname }}
+                      </v-card-title>
+                      <v-card-text
+                        >SELFIT과 함께한 시간 | {{ extime }}
+                      </v-card-text>
+                    </div>
+                  </v-row>
+                </v-col>
+                <v-col cols="8" align-self="center">
+                  <v-row>
+                    <v-spacer></v-spacer>
+                    <div class="mx-5" v-if="!isMy">
+                      <v-btn
+                        depressed
+                        color="grey lighten-4"
+                        class="mt-4 mb-4 mr-4"
+                        @click="follow()"
+                      >
+                        <v-icon color="grey lighten-2">mdi-heart</v-icon>
+                      </v-btn>
+                      <v-btn
+                        color="pink lighten-3"
+                        class="mt-4 mb-4 mr-4"
+                        @click="unfollow()"
+                      >
+                        <v-icon color="pink">mdi-heart</v-icon>
+                      </v-btn>
+                    </div>
+                  </v-row>
+                  <v-row class="ma-5">
+                    <v-spacer></v-spacer>
+                    <v-card>
                       <!-- 차트 사용 참고 링크 https://github.com/djaxho/pure-vue-chart?ref=madewithvuejs.com -->
                       <pure-vue-chart
-                        :points="[3, 5, 2, 5, 4]"
+                        :points="[
+                          { label: '홈트', value: getDailyType[1].count },
+                          { label: '요가', value: getDailyType[0].count },
+                          { label: '피트니스', value: getDailyType[3].count },
+                          { label: '필라테스', value: getDailyType[2].count },
+                        ]"
                         :width="400"
                         :height="200"
+                        class="ma-3"
+                        barColor="#f89b00"
+                        :show-x-axis="true"
+                        :show-values="true"
                       />
-                    </div>
-                  </v-col>
-                </v-row>
-              </div>
-              <v-card-text
-                class="mt-1"
-                v-if="getUserInfo.height > 0 && getUserInfo.weight > 0"
-              >
-                <v-row>
-                  <v-col>
-                    <div>
-                      <div class="text-subtitle-1">
-                        키 : {{ getUserInfo.height }} &nbsp; &nbsp; | &nbsp;
-                        몸무게 : {{ getUserInfo.weight }}
-                      </div>
-                    </div>
-                  </v-col>
-                </v-row>
-              </v-card-text>
-            </v-col>
-            <!-- v-if="팔로우 되어 있으면/팔로우 안 되어 있으면" -->
-            <div>
-              <v-btn
-                depressed
-                color="grey lighten-4"
-                class="mt-5 mx-3"
-                @click="follow()"
-              >
-                <v-icon color="grey lighten-2">mdi-heart</v-icon>
-                팔로우
-              </v-btn>
-              <v-btn
-                color="pink lighten-5"
-                class="mt-5 mx-3"
-                @click="unfollow()"
-              >
-                <v-icon color="pink">mdi-heart</v-icon>
-                팔로우 취소
-              </v-btn>
-            </div>
-          </v-row>
-        </v-layout>
+                    </v-card>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
 
         <v-row dense>
           <v-col cols="12">
-            <v-card color="#E6E6E6">
-              <!-- <v-row align="center" class="mx-2 my-2">
-                
-              </v-row> -->
-              <v-card-title class="text-h5 mt-2">
+            <v-card :color="color">
+              <v-card-title class="text-h5">
                 Level {{ getUserInfo.level }}
                 <v-spacer></v-spacer>
                 레벨업까지 {{ getUserInfo.exp }} exp
@@ -105,9 +102,8 @@
 
         <v-row dense>
           <v-col cols="12">
-            <v-card>
+            <v-card :color="color">
               <v-card-title class="text-h5"> 데일리 운동 기록 </v-card-title>
-
               <v-layout>
                 <CalendarHeatmap
                   :end-date="Date.now()"
@@ -119,26 +115,45 @@
                     '#673AB7',
                   ]"
                   :values="getDaily"
+                  class="mx-5"
               /></v-layout>
 
               <v-card-subtitle></v-card-subtitle>
             </v-card>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col>
-            <div>
-              <div>내가 팔로우 하는 사람</div>
-              <v-divider></v-divider>
-              <div>{{ extime }}</div>
-            </div>
+
+        <v-row dense>
+          <v-col cols="12">
+            <v-card :color="color">
+              <v-card-text
+                v-if="getUserInfo.height > 0 && getUserInfo.weight > 0"
+              >
+                키 : {{ getUserInfo.height }} &nbsp; &nbsp; | &nbsp; 몸무게 :
+                {{ getUserInfo.weight }}
+              </v-card-text>
+            </v-card>
           </v-col>
-          <v-col>
-            <div>
-              <div>나를 팔로우 하는 사람</div>
-              <v-divider></v-divider>
-              <div>{{ extime }}</div>
-            </div>
+        </v-row>
+
+        <v-row dense class="my-2">
+          <v-col cols="12">
+            <v-card :color="color">
+              <v-row>
+                <v-col>
+                  <div>
+                    <v-card-title>팔로우</v-card-title>
+                    <v-divider></v-divider>
+                  </div>
+                </v-col>
+                <v-col>
+                  <div>
+                    <v-card-title>팔로워</v-card-title>
+                    <v-divider></v-divider>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-card>
           </v-col>
         </v-row>
       </v-container>
@@ -153,14 +168,25 @@ import PureVueChart from "pure-vue-chart";
 
 export default {
   name: "userDetail",
+  data() {
+    return {
+      color: "#FEEEF1",
+    };
+  },
   components: {
     CalendarHeatmap,
     PureVueChart,
   },
   computed: {
-    ...mapGetters(["getDaily", "getContentWidth", "getUserInfo"]),
-    callUser() {
-      return this.$route.params.id;
+    ...mapGetters([
+      "getDaily",
+      "getContentWidth",
+      "getUserInfo",
+      "getDailyType",
+      "getLoginUser",
+    ]),
+    isMy() {
+      return this.getUserInfo.id == this.getLoginUser.id;
     },
     extime() {
       let time = 0;
@@ -173,14 +199,19 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("setDaily", this.callUser);
-    this.$store.dispatch("setUserInfo", this.callUser);
+    this.$store
+      .dispatch("setUserInfo", this.$route.params.id)
+      .then(() => {
+        return this.$store.dispatch("setDaily", this.$route.params.id);
+      })
+      .then(() => {
+        return this.$store.dispatch("setDailyType", this.$route.params.id);
+      });
   },
 };
 </script>
 
 <style>
-/* #totalEx */
 #profile {
   border-radius: 50%;
 }

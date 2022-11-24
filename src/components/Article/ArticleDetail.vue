@@ -42,7 +42,7 @@
         <v-btn
           color="deep-purple lighten-2"
           text
-          v-if="isMy()"
+          v-if="isMy"
           @click="goUrlwithPrams('ArticleModify', $route.params.id)"
         >
           글 수정
@@ -50,7 +50,7 @@
         <v-btn
           color="deep-purple lighten-2"
           text
-          v-if="isMy()"
+          v-if="isMy"
           @click="deleteArticle(getArticle.articleId)"
         >
           글 삭제
@@ -74,6 +74,9 @@ export default {
   computed: {
     ...mapState(["articles"]),
     ...mapGetters(["getArticle", "getContentWidth", "getLoginUser"]),
+    isMy() {
+      return this.getArticle.writerId == this.getLoginUser.id;
+    },
   },
   methods: {
     goUrl(url) {
@@ -86,9 +89,6 @@ export default {
     },
     deleteArticle(articleId) {
       this.$store.dispatch("deleteArticle", articleId);
-    },
-    isMy() {
-      return this.getArticle.writerId == this.getLoginUser.id;
     },
   },
   created() {
