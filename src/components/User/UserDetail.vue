@@ -32,7 +32,7 @@
                       <div>{{ extime }}</div>
                       <!-- 차트 사용 참고 링크 https://github.com/djaxho/pure-vue-chart?ref=madewithvuejs.com -->
                       <pure-vue-chart
-                        :points="[3,5,2,5,4]"
+                        :points="[3, 5, 2, 5, 4]"
                         :width="400"
                         :height="200"
                       />
@@ -57,20 +57,20 @@
               </v-card-text>
             </v-col>
             <!-- v-if="팔로우 되어 있으면/팔로우 안 되어 있으면" -->
-            <div >
+            <div>
               <v-btn
-              depressed
-              color="grey lighten-4"
-              class="mt-5 mx-3"
-              @click="follow()"
+                depressed
+                color="grey lighten-4"
+                class="mt-5 mx-3"
+                @click="follow()"
               >
                 <v-icon color="grey lighten-2">mdi-heart</v-icon>
                 팔로우
               </v-btn>
               <v-btn
-              color="pink lighten-5"
-              class="mt-5 mx-3"
-              @click="unfollow()"
+                color="pink lighten-5"
+                class="mt-5 mx-3"
+                @click="unfollow()"
               >
                 <v-icon color="pink">mdi-heart</v-icon>
                 팔로우 취소
@@ -91,6 +91,7 @@
                 레벨업까지 {{ getUserInfo.exp }} exp
               </v-card-title>
               <v-container>
+                <!-- 경험치 바 -->
                 <v-progress-linear
                   color="light-blue"
                   height="20"
@@ -107,7 +108,7 @@
             <v-card>
               <v-card-title class="text-h5"> 데일리 운동 기록 </v-card-title>
 
-              <v-container>
+              <v-layout>
                 <CalendarHeatmap
                   :end-date="Date.now()"
                   :range-color="[
@@ -118,7 +119,7 @@
                     '#673AB7',
                   ]"
                   :values="getDaily"
-              /></v-container>
+              /></v-layout>
 
               <v-card-subtitle></v-card-subtitle>
             </v-card>
@@ -136,14 +137,11 @@
             <div>
               <div>나를 팔로우 하는 사람</div>
               <v-divider></v-divider>
-                <div>{{ extime }}</div>
-              </div>
+              <div>{{ extime }}</div>
+            </div>
           </v-col>
         </v-row>
       </v-container>
-      <v-contain>
-        
-      </v-contain>
     </v-card>
   </div>
 </template>
@@ -151,7 +149,7 @@
 <script>
 import { CalendarHeatmap } from "vue-calendar-heatmap";
 import { mapGetters } from "vuex";
-import PureVueChart from 'pure-vue-chart';
+import PureVueChart from "pure-vue-chart";
 
 export default {
   name: "userDetail",

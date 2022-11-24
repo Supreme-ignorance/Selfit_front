@@ -4,14 +4,16 @@
     <v-container id="outer">
       <v-divider></v-divider>
       <v-row align="center">
+        <v-btn
+          color="deep-purple lighten-2"
+          text
+          class="mr-5 px-10"
+          @click="goBoard($route.params.boardSeq)"
+          >{{ getBoards[$route.params.boardSeq].boardName }}
+        </v-btn>
         <v-spacer></v-spacer>
         <div class="my-7 d-flex flex-row-reverse" v-if="getLoginUser.id">
-          <v-btn
-            color="deep-purple lighten-2"
-            text
-            class="mr-5"
-            @click="ArticleWrite()"
-          >
+          <v-btn color="deep-purple lighten-2" text class="mr-5">
             글 쓰기
           </v-btn>
         </div>
@@ -96,7 +98,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getArticles", "getContentWidth", "getLoginUser"]),
+    ...mapGetters([
+      "getArticles",
+      "getContentWidth",
+      "getLoginUser",
+      "getBoards",
+    ]),
   },
   created() {
     this.$store.dispatch("callArticlesPromise", this.$route.params.boardSeq);
@@ -108,6 +115,11 @@ export default {
       } else {
         alert("로그인 해주세요.");
       }
+    },
+    goBoard(url) {
+      this.$router
+        .push({ name: "ArticleList", params: { boardSeq: url } })
+        .catch(() => {});
     },
   },
 };

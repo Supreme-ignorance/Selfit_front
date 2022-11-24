@@ -14,7 +14,7 @@
         <v-spacer></v-spacer>
         <div v-if="getLoginUser.id">
           <v-btn
-            color="deep-purple lighten-2"
+            color="grey"
             text
             icon
             class="mx-3"
@@ -24,7 +24,7 @@
             <v-icon>mdi-thumb-up</v-icon>
           </v-btn>
           <v-btn
-            color="grey"
+            color="deep-purple lighten-2"
             text
             icon
             class="mx-3"
