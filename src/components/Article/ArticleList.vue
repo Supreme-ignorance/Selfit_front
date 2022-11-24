@@ -14,8 +14,13 @@
           </v-btn>
         </div>
         <v-spacer></v-spacer>
-        <div class="my-7 d-flex flex-row-reverse" v-if="getLoginUser.id">
-          <v-btn color="deep-purple lighten-2" text class="mr-5">
+        <div class="my-7 d-flex flex-row-reverse">
+          <v-btn
+            color="deep-purple lighten-2"
+            text
+            class="mr-5"
+            @click="ArticleWrite()"
+          >
             글 쓰기
           </v-btn>
         </div>
@@ -50,17 +55,9 @@
             </template>
             <template v-slot:[`item.writerNickName`]="{ item }">
               <v-chip color="">
-                <router-link
-                  :to="{
-                    name: 'detail',
-                    params: {
-                      id: item.writerId,
-                    },
-                  }"
-                  id="to"
-                >
+                <div @click="goDetail(item.writerId)">
                   {{ item.writerNickName }}
-                </router-link>
+                </div>
               </v-chip>
             </template>
           </v-data-table>
@@ -116,12 +113,23 @@ export default {
         this.$router.push({ name: "ArticleWrite" }).catch(() => {});
       } else {
         alert("로그인 해주세요.");
+        this.$router.push({ name: "login" }).catch(() => {});
       }
     },
     goBoard(url) {
       this.$router
         .push({ name: "ArticleList", params: { boardSeq: url } })
         .catch(() => {});
+    },
+    goDetail(writerId) {
+      if (this.getLoginUser.id) {
+        this.$router
+          .push({ name: "detail", params: { id: writerId } })
+          .catch(() => {});
+      } else {
+        alert("로그인 해주세요.");
+        this.$router.push({ name: "login" }).catch(() => {});
+      }
     },
   },
 };

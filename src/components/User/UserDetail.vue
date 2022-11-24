@@ -37,14 +37,17 @@
                     <v-spacer></v-spacer>
                     <div class="mx-5" v-if="!isMy">
                       <v-btn
+                        v-if="isCheck"
                         depressed
                         color="grey lighten-4"
                         class="mt-4 mb-4 mr-4"
                         @click="follow()"
                       >
-                        <v-icon color="grey lighten-2">mdi-heart</v-icon>
+                        <v-icon color="grey lighten-1">mdi-heart</v-icon>
                       </v-btn>
                       <v-btn
+                        v-else
+                        depressed
                         color="pink lighten-3"
                         class="mt-4 mb-4 mr-4"
                         @click="unfollow()"
@@ -103,7 +106,7 @@
         <v-row dense>
           <v-col cols="12">
             <v-card :color="color">
-              <v-card-title class="text-h5"> 데일리 운동 기록 </v-card-title>
+              <v-card-title class=""> 데일리 운동 기록 </v-card-title>
               <v-layout>
                 <CalendarHeatmap
                   :end-date="Date.now()"
@@ -155,7 +158,7 @@
                         <v-card height="30" align="center">
                           <router-link
                             :to="{
-                              name: detail,
+                              name: 'detail',
                               params: { id: following.followerId },
                             }"
                             id="to"
@@ -182,7 +185,7 @@
                         <v-card height="30" align="center">
                           <router-link
                             :to="{
-                              name: detail,
+                              name: 'detail',
                               params: { id: follower.userId },
                             }"
                             id="to"
@@ -213,8 +216,30 @@ export default {
   data() {
     return {
       color: "#FEEEF1",
-      isCheck: null,
+      isCheck: this.getisfollow,
     };
+  },
+  methods: {
+    follow() {
+      let payload = {
+        followerId: this.$route.params.id,
+        userId: sessionStorage.getItem("currentLogin_id"),
+      };
+
+      this.$store.dispatch("createFollow", payload);
+      this.isCheck = !this.isCheck;
+      this.$router.go();
+    },
+    unfollow() {
+      let payload = {
+        followerId: this.$route.params.id,
+        userId: sessionStorage.getItem("currentLogin_id"),
+      };
+
+      this.$store.dispatch("deleteFollow", payload);
+      this.isCheck = !this.isCheck;
+      this.$router.go();
+    },
   },
   components: {
     CalendarHeatmap,
@@ -229,6 +254,7 @@ export default {
       "getLoginUser",
       "getFollowings",
       "getFollowers",
+      "getisfollow",
     ]),
     isMy() {
       return this.getUserInfo?.id == this.getLoginUser?.id;
@@ -260,6 +286,18 @@ export default {
       })
       .then(() => {
         return this.$store.dispatch("setFollowerList", this.$route.params.id);
+      })
+      .then(() => {
+        let payload = {
+          followerId: this.$route.params.id,
+          userId: sessionStorage.getItem("currentLogin_id"),
+        };
+
+        if (payload.followerId == payload.userId) return null;
+        else return this.$store.dispatch("setIsfollow", payload);
+      })
+      .then(() => {
+        this.isCheck = this.getisfollow;
       });
   },
 };
