@@ -9,6 +9,7 @@ import VideoView from "../views/VideoView.vue";
 import UserLogin from "../components/User/UserLogin.vue";
 import UserRegist from "../components/User/UserRegist.vue";
 import UserDetail from "../components/User/UserDetail.vue";
+import UserModify from "../components/User/UserModify.vue";
 
 import ArticleForm from "../components/Article/ArticleForm";
 import ArticleList from "../components/Article/ArticleList.vue";
@@ -49,6 +50,11 @@ const routes = [
         path: "detail/:id",
         name: "detail",
         component: UserDetail,
+      },
+      {
+        path: "modify/:id",
+        name: "modify",
+        component: UserModify,
       },
     ],
   },

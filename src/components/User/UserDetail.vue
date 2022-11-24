@@ -35,6 +35,16 @@
                 <v-col cols="8" align-self="center">
                   <v-row>
                     <v-spacer></v-spacer>
+                    <div class="mx-5" v-if="isMy">
+                      <v-btn
+                        depressed
+                        color="blue lighten-4"
+                        class="mt-4 mb-4 mr-4"
+                        @click="goModify(getUserInfo?.id)"
+                      >
+                        <v-icon color="blue lighten-1">mdi-pencil</v-icon>
+                      </v-btn>
+                    </div>
                     <div class="mx-5" v-if="!isMy">
                       <v-btn
                         v-if="isCheck"
@@ -239,6 +249,9 @@ export default {
       this.$store.dispatch("deleteFollow", payload);
       this.isCheck = !this.isCheck;
       this.$router.go();
+    },
+    goModify(id) {
+      this.$router.push({ name: "modify", params: { id: id } }).catch(() => {});
     },
   },
   components: {

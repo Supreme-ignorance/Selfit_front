@@ -37,7 +37,6 @@ export default {
           },
         })
           .then((res) => {
-            console.log("daily setting...");
             commit("SET_DAILYTYPE", res.data);
             response(res.data);
           })
@@ -81,7 +80,6 @@ export default {
           },
         })
           .then((res) => {
-            console.log("daily setting...");
             commit("SET_DAILY", res.data);
             response(res.data);
           })
