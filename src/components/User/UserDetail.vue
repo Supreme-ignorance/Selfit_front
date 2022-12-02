@@ -163,11 +163,10 @@
                     <v-divider></v-divider>
                     <v-row>
                       <v-col
-                        dense
-                        class="ma-2"
+                        class="ma-2 py-1"
                         v-for="following in getFollowings"
                         :key="following.followIndex"
-                        cols="4"
+                        cols="5"
                       >
                         <v-card height="30" align="center">
                           <router-link
@@ -190,11 +189,10 @@
                     <v-divider></v-divider>
                     <v-row>
                       <v-col
-                        dense
-                        class="ma-2"
+                        class="ma-2 py-1"
                         v-for="follower in getFollowers"
                         :key="follower.followIndex"
-                        cols="4"
+                        cols="5"
                       >
                         <v-card height="30" align="center">
                           <router-link
